@@ -22,6 +22,10 @@
             app:itemRippleColor="#C9C9C9"
             app:itemIconTint="@color/selector_bottom_nav"
             app:itemTextColor="@color/selector_bottom_nav"
+            android:background="@color/black"
+            app:itemTextAppearanceActive="@style/BottomNavigation.ItemTextAppearance"
+            app:itemTextAppearanceInactive="@style/BottomNavigation.ItemTextAppearance"
+            app:labelVisibilityMode="labeled"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>

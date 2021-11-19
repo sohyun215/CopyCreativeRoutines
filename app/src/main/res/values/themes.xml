@@ -12,5 +12,18 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="calender_weekDayTextStyle" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="calender_todayTextStyle">
+        <item name="android:textColor">@color/today_text_color</item>
+    </style>
+    <style name="BottomNavigation.ItemTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">12sp</item>
     </style>
 </resources>

@@ -9,7 +9,7 @@
     <item
         android:id="@+id/menu_greats"
         android:icon="@drawable/ic_bottom_nav_greats"
-        android:title="위인"/>
+        android:title="인물"/>
 
     <item
         android:id="@+id/menu_reward"

@@ -29,6 +29,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun initBottomNavigation() {
+        transFragment(FIRST_FRAGMENT)
         binding.bnvHome.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.menu_home -> {
