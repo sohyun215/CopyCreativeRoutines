@@ -1,4 +1,4 @@
-package com.android.copycreativeroutines.home_activity.greats_fragment
+package com.android.copycreativeroutines.view.home_activity.greats_fragment
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

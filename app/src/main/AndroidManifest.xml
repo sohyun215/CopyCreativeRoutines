@@ -8,21 +8,30 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.CopyCreativeRoutines">
+        android:theme="@style/Theme.CopyCreativeRoutines"
+        >
         <activity
-            android:name=".home_activity.reward_fragment.ranking.RankingDetailActivity"
+            android:name=".view.home_activity.splashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.home_activity.reward_fragment.ranking.RankingDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".home_activity.greats_fragment.GreatsDetailActivity"
+            android:name=".view.home_activity.greats_fragment.GreatsDetailActivity"
             android:exported="false" />
         <activity
             android:name=".HomeActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="false">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
     </application>
 

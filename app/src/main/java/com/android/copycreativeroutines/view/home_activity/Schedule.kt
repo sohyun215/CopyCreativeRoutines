@@ -1,4 +1,4 @@
-package com.android.copycreativeroutines.home_activity
+package com.android.copycreativeroutines.view.home_activity
 
 import java.io.Serializable
 

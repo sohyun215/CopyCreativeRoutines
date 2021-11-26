@@ -6,7 +6,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".home_activity.reward_fragment.ranking.RankingDetailActivity">
+        tools:context=".view.home_activity.reward_fragment.ranking.RankingDetailActivity">
 
         <TextView
             android:layout_width="wrap_content"

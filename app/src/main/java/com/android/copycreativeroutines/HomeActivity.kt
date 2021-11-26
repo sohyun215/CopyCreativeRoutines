@@ -3,15 +3,11 @@ package com.android.copycreativeroutines
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
-import androidx.viewpager2.widget.ViewPager2
 import com.android.copycreativeroutines.databinding.ActivityHomeBinding
-import com.android.copycreativeroutines.home_activity.HomeViewPagerAdapter
-import com.android.copycreativeroutines.home_activity.home_fragment.HomeFragment
-import com.android.copycreativeroutines.home_activity.greats_fragment.GreatsFragment
-import com.android.copycreativeroutines.home_activity.reward_fragment.RewardFragment
-import com.android.copycreativeroutines.home_activity.profile_fragment.ProfileFragment
-import com.android.copycreativeroutines.home_activity.reward_fragment.badge.BadgeFragment
-import com.android.copycreativeroutines.home_activity.reward_fragment.ranking.RankingFragment
+import com.android.copycreativeroutines.view.home_activity.home_fragment.HomeFragment
+import com.android.copycreativeroutines.view.home_activity.greats_fragment.GreatsFragment
+import com.android.copycreativeroutines.view.home_activity.reward_fragment.RewardFragment
+import com.android.copycreativeroutines.view.home_activity.profile_fragment.ProfileFragment
 
 class HomeActivity : AppCompatActivity() {
 

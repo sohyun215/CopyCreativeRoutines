@@ -1,10 +1,10 @@
-package com.android.copycreativeroutines.home_activity.home_fragment
+package com.android.copycreativeroutines.view.home_activity.home_fragment
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.copycreativeroutines.databinding.ItemScheduleListBinding
-import com.android.copycreativeroutines.home_activity.Schedule
+import com.android.copycreativeroutines.view.home_activity.Schedule
 
 class ScheduleAdapter(val schedule:ArrayList<Schedule>)
     : RecyclerView.Adapter<ScheduleAdapter.ViewHolder>(){

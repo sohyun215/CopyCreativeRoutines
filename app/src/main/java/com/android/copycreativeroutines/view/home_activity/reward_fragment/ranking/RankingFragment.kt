@@ -1,4 +1,4 @@
-package com.android.copycreativeroutines.home_activity.reward_fragment.ranking
+package com.android.copycreativeroutines.view.home_activity.reward_fragment.ranking
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.android.copycreativeroutines.databinding.FragmentRankingBinding
-import com.android.copycreativeroutines.home_activity.User
+import com.android.copycreativeroutines.view.home_activity.User
 
 class RankingFragment : Fragment() {
 

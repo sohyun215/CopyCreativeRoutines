@@ -1,4 +1,4 @@
-package com.android.copycreativeroutines.home_activity.home_fragment
+package com.android.copycreativeroutines.view.home_activity.home_fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,13 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.android.copycreativeroutines.R
 import com.android.copycreativeroutines.databinding.FragmentHomeBinding
-import com.android.copycreativeroutines.databinding.FragmentProfileBinding
-import com.android.copycreativeroutines.home_activity.Schedule
+import com.android.copycreativeroutines.view.home_activity.Schedule
 import com.prolificinteractive.materialcalendarview.CalendarDay
-import com.prolificinteractive.materialcalendarview.CalendarMode
 
 class HomeFragment : Fragment() {
 

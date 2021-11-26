@@ -1,4 +1,4 @@
-package com.android.copycreativeroutines.home_activity.greats_fragment
+package com.android.copycreativeroutines.view.home_activity.greats_fragment
 
 import android.content.Intent
 import android.view.LayoutInflater
