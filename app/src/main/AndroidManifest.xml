@@ -11,7 +11,7 @@
         android:theme="@style/Theme.CopyCreativeRoutines"
         >
         <activity
-            android:name=".view.home_activity.splashActivity"
+            android:name=".ui.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -19,13 +19,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.home_activity.reward_fragment.ranking.RankingDetailActivity"
+            android:name=".ui.RankingDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".view.home_activity.greats_fragment.GreatsDetailActivity"
+            android:name=".ui.GreatsDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".ui.HomeActivity"
             android:exported="false">
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->

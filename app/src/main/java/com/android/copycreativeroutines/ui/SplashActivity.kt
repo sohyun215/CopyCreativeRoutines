@@ -1,14 +1,13 @@
-package com.android.copycreativeroutines.view.home_activity
+package com.android.copycreativeroutines.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import com.android.copycreativeroutines.HomeActivity
 import com.android.copycreativeroutines.R
 
-class splashActivity : AppCompatActivity() {
-    val splash_view_time: Long = 2000
+class SplashActivity : AppCompatActivity() {
+    val splash_view_time: Long = 1000
 
     override fun onCreate(savedInstanceState: Bundle?) {
 

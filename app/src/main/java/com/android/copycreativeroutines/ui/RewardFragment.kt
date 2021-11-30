@@ -1,4 +1,4 @@
-package com.android.copycreativeroutines.view.home_activity.reward_fragment
+package com.android.copycreativeroutines.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.android.copycreativeroutines.R
 import com.android.copycreativeroutines.databinding.FragmentRewardBinding
-import com.android.copycreativeroutines.view.home_activity.reward_fragment.badge.BadgeFragment
-import com.android.copycreativeroutines.view.home_activity.reward_fragment.ranking.RankingFragment
 
 class RewardFragment : Fragment() {
 

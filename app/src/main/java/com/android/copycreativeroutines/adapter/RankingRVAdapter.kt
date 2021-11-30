@@ -1,4 +1,4 @@
-package com.android.copycreativeroutines.view.home_activity.reward_fragment.ranking
+package com.android.copycreativeroutines.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -6,7 +6,8 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.android.copycreativeroutines.databinding.ItemRankingListBinding
-import com.android.copycreativeroutines.view.home_activity.User
+import com.android.copycreativeroutines.data.User
+import com.android.copycreativeroutines.ui.RankingDetailActivity
 
 class RankingRVAdapter  : RecyclerView.Adapter<RankingRVAdapter.RankingViewHolder>() {
     val userList = mutableListOf<User>()

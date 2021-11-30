@@ -1,21 +1,21 @@
-package com.android.copycreativeroutines.view.home_activity.profile_fragment
+package com.android.copycreativeroutines.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.android.copycreativeroutines.databinding.FragmentProfileBinding
+import com.android.copycreativeroutines.databinding.FragmentBadgeBinding
 
-class ProfileFragment : Fragment() {
+class BadgeFragment : Fragment() {
 
-    private lateinit var binding : FragmentProfileBinding
+    private lateinit var binding : FragmentBadgeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        binding = FragmentProfileBinding.inflate(inflater, container, false)
+        binding = FragmentBadgeBinding.inflate(inflater, container, false)
         return binding.root
     }
 }

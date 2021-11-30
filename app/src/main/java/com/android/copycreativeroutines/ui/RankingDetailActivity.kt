@@ -1,4 +1,4 @@
-package com.android.copycreativeroutines.view.home_activity.reward_fragment.ranking
+package com.android.copycreativeroutines.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
