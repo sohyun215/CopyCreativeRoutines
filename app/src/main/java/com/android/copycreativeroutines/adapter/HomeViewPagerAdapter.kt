@@ -1,4 +1,4 @@
-package com.android.copycreativeroutines.view.home_activity
+package com.android.copycreativeroutines.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity

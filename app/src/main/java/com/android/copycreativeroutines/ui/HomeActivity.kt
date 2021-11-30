@@ -1,15 +1,12 @@
-package com.android.copycreativeroutines
+package com.android.copycreativeroutines.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import com.android.copycreativeroutines.R
 import com.android.copycreativeroutines.databinding.ActivityHomeBinding
-import com.android.copycreativeroutines.view.home_activity.home_fragment.HomeFragment
-import com.android.copycreativeroutines.view.home_activity.greats_fragment.GreatsFragment
-import com.android.copycreativeroutines.view.home_activity.reward_fragment.RewardFragment
-import com.android.copycreativeroutines.view.home_activity.profile_fragment.ProfileFragment
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), GreatDetailFragment.OnFragmentInteractionListener {
 
     private lateinit var binding : ActivityHomeBinding
 
@@ -77,5 +74,9 @@ class HomeActivity : AppCompatActivity() {
         const val SECOND_FRAGMENT = 1
         const val THIRD_FRAGMENT = 2
         const val FOURTH_FRAGMENT = 3
+    }
+
+    override fun onFragmentInteraction() {
+        binding.bnvHome.selectedItemId = R.id.menu_home
     }
 }
