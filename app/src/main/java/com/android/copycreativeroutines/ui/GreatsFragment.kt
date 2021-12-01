@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import com.android.copycreativeroutines.R
 import com.android.copycreativeroutines.adapter.GreatsRVAdapter
 import com.android.copycreativeroutines.data.Great
@@ -55,25 +53,12 @@ class GreatsFragment : Fragment() {
             "https://upload.wikimedia.org/wikipedia/commons/3/3e/Charles_Robert_Darwin_by_John_Collier.jpg"
         greatsRVAdapter.greatsList.addAll( // 위인 추가
             listOf(
-                Great(uri, "찰스다윈", ""),
-                Great(uri, "찰스다윈", ""),
-                Great(uri, "찰스다윈", ""),
-                Great(uri, "찰스다윈", ""),
-                Great(uri, "찰스다윈", ""),
+                Great("찰스다윈", "", uri, "", listOf(Great.Schedule("","",""))),
+                Great("찰스다윈", "", uri, "", listOf(Great.Schedule("","",""))),
+                Great("찰스다윈", "", uri, "", listOf(Great.Schedule("","",""))),
+                Great("찰스다윈", "", uri, "", listOf(Great.Schedule("","",""))),
+                Great("찰스다윈", "", uri, "", listOf(Great.Schedule("","",""))),
 
-                Great(uri, "찰스다윈", ""),
-                Great(uri, "찰스다윈", ""),
-                Great(uri, "찰스다윈", ""),
-                Great(uri, "찰스다윈", ""),
-                Great(uri, "찰스다윈", ""),
-
-                Great(uri, "찰스다윈", ""),
-                Great(uri, "찰스다윈", ""),
-                Great(uri, "찰스다윈", ""),
-                Great(uri, "찰스다윈", ""),
-                Great(uri, "찰스다윈", ""),
-
-                Great(uri, "찰스다윈", "")
             )
         )
     }

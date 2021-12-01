@@ -3,14 +3,14 @@ package com.android.copycreativeroutines.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.android.copycreativeroutines.data.Schedule
+import com.android.copycreativeroutines.data.Great
 import com.android.copycreativeroutines.databinding.ItemGreatScheduleListBinding
 
 class ScheduleSelectAdapter : RecyclerView.Adapter<ScheduleSelectAdapter.ScheduleViewHolder>() {
-    val sheduleList = mutableListOf<Schedule>()
+    val sheduleList = mutableListOf<Great.Schedule>()
 
     class ScheduleViewHolder (private val binding : ItemGreatScheduleListBinding) : RecyclerView.ViewHolder(binding.root){
-        fun onBind(data : Schedule) {
+        fun onBind(data : Great.Schedule) {
             binding.tvScheduleName.text = data.title
 
             val scheduleTime : String

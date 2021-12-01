@@ -1,7 +1,15 @@
 package com.android.copycreativeroutines.data
 
 data class Great(
-    val image : String,
-    val name : String,
-    val info : String
-)
+    val name: String,
+    val category: String,
+    val image: String,
+    val descript: String,
+    val schedule: List<Schedule>
+) {
+    data class Schedule(
+        val title: String,
+        val startTime: String,
+        val endTime: String
+    )
+}

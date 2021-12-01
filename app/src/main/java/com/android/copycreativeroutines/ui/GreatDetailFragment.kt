@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.android.copycreativeroutines.R
 import com.android.copycreativeroutines.adapter.ScheduleSelectAdapter
-import com.android.copycreativeroutines.data.Schedule
+import com.android.copycreativeroutines.data.Great
 import com.android.copycreativeroutines.databinding.FragmentGreatDetailBinding
 
 class GreatDetailFragment : Fragment() {
@@ -79,10 +79,10 @@ class GreatDetailFragment : Fragment() {
 
         scheduleSelectAdapter.sheduleList.addAll( // schedule 서버 api 구현 필요
             listOf(
-                Schedule("찰스다윈","기상","AM 7:00", ""),
-                Schedule("찰스다윈","가벼운 산책","AM 7:00","AM 7:30"),
-                Schedule("찰스다윈","아침 식사","AM 7:30","AM 8:00"),
-                Schedule("찰스다윈","일&편지 읽기","AM 8:00","AM 12:00")
+                Great.Schedule("기상","AM 7:00", ""),
+                Great.Schedule("가벼운 산책","AM 7:00","AM 7:30"),
+                Great.Schedule("아침 식사","AM 7:30","AM 8:00"),
+                Great.Schedule("일&편지 읽기","AM 8:00","AM 12:00")
             )
         )
     }
