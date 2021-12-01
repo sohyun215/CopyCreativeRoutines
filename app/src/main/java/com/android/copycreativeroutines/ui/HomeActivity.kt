@@ -8,7 +8,7 @@ import com.android.copycreativeroutines.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity(), GreatDetailFragment.OnFragmentInteractionListener {
 
-    private lateinit var binding : ActivityHomeBinding
+    private lateinit var binding: ActivityHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +24,7 @@ class HomeActivity : AppCompatActivity(), GreatDetailFragment.OnFragmentInteract
     private fun initBottomNavigation() {
         transFragment(FIRST_FRAGMENT)
         binding.bnvHome.setOnItemSelectedListener {
-            when(it.itemId){
+            when (it.itemId) {
                 R.id.menu_home -> {
                     transFragment(FIRST_FRAGMENT)
                     return@setOnItemSelectedListener true
@@ -45,10 +45,12 @@ class HomeActivity : AppCompatActivity(), GreatDetailFragment.OnFragmentInteract
         }
     }
 
-    private fun transFragment(frgament : Int) {
+    private fun transFragment(frgament: Int) {
+        supportFragmentManager.popBackStack()
+
         val transaction = supportFragmentManager.beginTransaction()
 
-        when(frgament) {
+        when (frgament) {
             FIRST_FRAGMENT -> {
                 val homeFragment = HomeFragment()
                 transaction.replace(R.id.fc_home, homeFragment).commit()
