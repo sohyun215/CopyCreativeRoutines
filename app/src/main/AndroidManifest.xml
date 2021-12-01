@@ -22,17 +22,8 @@
             android:name=".ui.RankingDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.GreatsDetailActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.HomeActivity"
-            android:exported="false">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-        </activity>
+            android:exported="false" />
     </application>
 
 </manifest>
