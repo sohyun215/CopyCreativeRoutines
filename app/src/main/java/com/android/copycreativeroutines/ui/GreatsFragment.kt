@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.android.copycreativeroutines.R
 import com.android.copycreativeroutines.adapter.GreatsRVAdapter
 import com.android.copycreativeroutines.data.Great
@@ -43,6 +45,7 @@ class GreatsFragment : Fragment() {
                     .supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.fc_home, GreatDetailFragment())
+                    .addToBackStack(null)
                     .commit()
             }
         })
