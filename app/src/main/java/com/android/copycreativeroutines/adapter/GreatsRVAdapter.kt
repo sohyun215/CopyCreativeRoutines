@@ -11,7 +11,8 @@ import com.bumptech.glide.Glide
 
 class GreatsRVAdapter() : RecyclerView.Adapter<GreatsRVAdapter.GreatsViewHolder>() {
     private lateinit var itemClickListner: ItemClickListener
-    val greatsList = mutableListOf<Great>()
+    var greatsList = mutableListOf<Great>()
+
 
     interface ItemClickListener{
         fun onClick(view: View, position: Int)
