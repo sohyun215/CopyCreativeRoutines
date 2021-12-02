@@ -1,55 +1,20 @@
 package com.android.copycreativeroutines.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.android.copycreativeroutines.R
-import com.android.copycreativeroutines.adapter.GreatsRVAdapter
-import com.android.copycreativeroutines.data.Great
 import com.android.copycreativeroutines.databinding.ActivityHomeBinding
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 
 class HomeActivity : AppCompatActivity(), GreatDetailFragment.OnFragmentInteractionListener {
 
     private lateinit var binding: ActivityHomeBinding
-    private lateinit var greatsRVAdapter: GreatsRVAdapter
-
-    val database = FirebaseDatabase.getInstance()
-    var myRef = database.getReference("Greats")
-    var list = mutableListOf<Great>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
 
         init()
-        initData()
-    }
-
-    private fun initData(){
-        greatsRVAdapter = GreatsRVAdapter()
-        myRef.addValueEventListener(object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                for (ds in snapshot.children) {
-                    Log.e("database",ds.toString())
-                    val name : String = ds.child("name").value as String
-                    val image: String = ds.child("image").value as String
-                    val descript: String = ds.child("descript").value as String
-                    val category: String = ds.child("category").value as String
-                    list.add(Great(name,category,image,descript,listOf(Great.Schedule("","",""))))
-                }
-                greatsRVAdapter.greatsList = list
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Log.e("database","onCancelled")
-            }
-
-        })
     }
 
     private fun init() {
