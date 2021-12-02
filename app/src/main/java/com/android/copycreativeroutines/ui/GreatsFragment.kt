@@ -15,6 +15,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
 class GreatsFragment : Fragment() {
+
     private lateinit var binding: FragmentGreatsBinding
     private lateinit var greatsRVAdapter: GreatsRVAdapter
 
@@ -38,7 +39,6 @@ class GreatsFragment : Fragment() {
         greatsRVAdapter = GreatsRVAdapter()
         greatsRVAdapter.setItemClickListener(object : GreatsRVAdapter.ItemClickListener {
             override fun onClick(view: View, position: Int) {
-                greatsRVAdapter.greatsList.clear()
                 // great 정보 GreatDetailFragment에 넘겨주기
 //               greatsRVAdapter.greatsList[position]
 
@@ -57,6 +57,7 @@ class GreatsFragment : Fragment() {
 
     private fun initData() {
         val myRef = Firebase.database.getReference("Greats")
+
         myRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (ds in snapshot.children) {
@@ -64,10 +65,18 @@ class GreatsFragment : Fragment() {
                     val image: String = ds.child("image").value.toString()
                     val descript: String = ds.child("descript").value.toString()
                     val category: String = ds.child("category").value.toString()
-                    val schdeule = listOf<Great.Schedule>() // 추가
+//                    val schdeule = listOf<Great.Schedule>() // 추가
+                    val schedList = mutableListOf<Great.Schedule>()
+                    for (sched in ds.child("schedule").children) {
+                        val startTime :String = sched.child("start").value.toString()
+                        val endTime :String = sched.child("end").value.toString()
+                        val title :String = sched.child("title").value.toString()
+                        schedList.add(Great.Schedule(title, startTime,endTime))
+                    }
 
-                    list.add(Great(name, category, image, descript, schdeule))
+                    list.add(Great(name,category,image,descript,schedList))
                 }
+                Log.d("database",list.toString())
                 greatsRVAdapter.notifyDataSetChanged()
             }
 
