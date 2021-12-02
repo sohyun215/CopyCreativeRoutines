@@ -43,7 +43,7 @@ class ProfileFragment : Fragment() {
         rdb= FirebaseDatabase.getInstance().getReference("User/userDiary")
         rdb.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                //myPageRVAdapter.diaryList.clear()
+                myPageRVAdapter.diaryList.clear()
                 for (ds in snapshot.children) {
                     //Log.i("database",ds.toString())
                     val date=ds.child("date").value.toString()

@@ -1,6 +1,7 @@
 package com.android.copycreativeroutines.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,14 +11,19 @@ import com.android.copycreativeroutines.adapter.GreatsRVAdapter
 import com.android.copycreativeroutines.data.Great
 import com.android.copycreativeroutines.databinding.FragmentGreatsBinding
 
+import com.google.firebase.database.*
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+
+
 class GreatsFragment : Fragment() {
 
     private lateinit var binding: FragmentGreatsBinding
     private lateinit var greatsRVAdapter: GreatsRVAdapter
-//    var database = FirebaseDatabase.getInstance()
-//    var table = database.getReference("Greats")
-//
-//    var great = table.child("1/name").get()
+
+
+    var list = mutableListOf<Great>()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,6 +35,7 @@ class GreatsFragment : Fragment() {
     }
 
     private fun init() {
+        initData()
         initAdapter()
     }
 
@@ -47,19 +54,41 @@ class GreatsFragment : Fragment() {
                     .commit()
             }
         })
+        greatsRVAdapter.greatsList = list
         binding.rvGreats.adapter = greatsRVAdapter
+    }
 
-        val uri =
-            "https://upload.wikimedia.org/wikipedia/commons/3/3e/Charles_Robert_Darwin_by_John_Collier.jpg"
-        greatsRVAdapter.greatsList.addAll( // 위인 추가
-            listOf(
-                Great("찰스다윈", "", uri, "", listOf(Great.Schedule("","",""))),
-                Great("찰스다윈", "", uri, "", listOf(Great.Schedule("","",""))),
-                Great("찰스다윈", "", uri, "", listOf(Great.Schedule("","",""))),
-                Great("찰스다윈", "", uri, "", listOf(Great.Schedule("","",""))),
-                Great("찰스다윈", "", uri, "", listOf(Great.Schedule("","",""))),
 
-            )
-        )
+
+    private fun initData() {
+        val myRef = Firebase.database.getReference("Greats")
+
+        myRef.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (ds in snapshot.children) {
+                    val name = ds.child("name").value.toString()
+                    val image: String = ds.child("image").value.toString()
+                    val descript: String = ds.child("descript").value.toString()
+                    val category: String = ds.child("category").value.toString()
+//                    val schdeule = listOf<Great.Schedule>() // 추가
+                    val schedList = mutableListOf<Great.Schedule>()
+                    for (sched in ds.child("schedule").children) {
+                        val startTime :String = sched.child("start").value.toString()
+                        val endTime :String = sched.child("end").value.toString()
+                        val title :String = sched.child("title").value.toString()
+                        schedList.add(Great.Schedule(title, startTime,endTime))
+                    }
+
+                    list.add(Great(name,category,image,descript,schedList))
+                }
+                Log.d("database",list.toString())
+                greatsRVAdapter.notifyDataSetChanged()
+            }
+
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("database","database failed")
+            }
+        })
     }
 }
