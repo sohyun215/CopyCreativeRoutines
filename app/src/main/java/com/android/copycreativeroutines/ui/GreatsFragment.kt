@@ -12,17 +12,13 @@ import com.android.copycreativeroutines.data.Great
 import com.android.copycreativeroutines.databinding.FragmentGreatsBinding
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 
 class GreatsFragment : Fragment() {
 
     private lateinit var binding: FragmentGreatsBinding
     private lateinit var greatsRVAdapter: GreatsRVAdapter
-    lateinit var rdb:DatabaseReference
 
-
-    var name :String = "blank"
     var list = mutableListOf<Great>()
 
     override fun onCreateView(
@@ -35,54 +31,8 @@ class GreatsFragment : Fragment() {
     }
 
     private fun init() {
-        Log.e("database",list.toString())
+        initData()
         initAdapter()
-    }
-
-    private fun initData() {
-        var database = FirebaseDatabase.getInstance()
-        var myRef = database.getReference("Greats")
-
-        rdb = FirebaseDatabase.getInstance().getReference("Greats/1")
-        Log.e("database",rdb.toString())
-        rdb.addValueEventListener(object: ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                for (ds in snapshot.children) {
-                    Log.e("database",ds.toString())
-                    var name : String = ds.child("name").value as String
-                    var image: String = ds.child("image").value as String
-                    var descript: String = ds.child("descript").value as String
-                    var category: String = ds.child("category").value as String
-
-                    list.add(Great(name,category,image,descript,listOf(Great.Schedule("","",""))))
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
-        })
-
-        myRef.addListenerForSingleValueEvent(object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                Log.e("database","initiated2")
-                for (ds in snapshot.children) {
-                    Log.e("database",ds.toString())
-                    var name : String = ds.child("name").value as String
-                    var image: String = ds.child("image").value as String
-                    var descript: String = ds.child("descript").value as String
-                    var category: String = ds.child("category").value as String
-
-                    list.add(Great(name,category,image,descript,listOf(Great.Schedule("","",""))))
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Log.e("database","database failed")
-            }
-
-        })
     }
 
     private fun initAdapter() {
@@ -100,22 +50,31 @@ class GreatsFragment : Fragment() {
                     .commit()
             }
         })
+        greatsRVAdapter.greatsList = list
         binding.rvGreats.adapter = greatsRVAdapter
+    }
 
-        initData()
 
-        val uri =
-            "https://upload.wikimedia.org/wikipedia/commons/3/3e/Charles_Robert_Darwin_by_John_Collier.jpg"
-        greatsRVAdapter.greatsList.addAll( // 위인 추가
-            listOf(
-//                Great(myRef.child("1/names").value.toString(),"","","",listOf(Great.Schedule("","",""))),
-//                Great(name, "", uri, "", listOf(Great.Schedule("","",""))),
-                Great("찰스다윈", "", uri, "", listOf(Great.Schedule("","",""))),
-                Great("찰스다윈", "", uri, "", listOf(Great.Schedule("","",""))),
-                Great("찰스다윈", "", uri, "", listOf(Great.Schedule("","",""))),
-                Great("찰스다윈", "", uri, "", listOf(Great.Schedule("","",""))),
+    private fun initData() {
+        val myRef = Firebase.database.getReference("Greats")
 
-            )
-        )
+        myRef.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (ds in snapshot.children) {
+                    val name = ds.child("name").value.toString()
+                    val image: String = ds.child("image").value.toString()
+                    val descript: String = ds.child("descript").value.toString()
+                    val category: String = ds.child("category").value.toString()
+                    val schdeule = listOf<Great.Schedule>() // 추가
+
+                    list.add(Great(name,category,image,descript,schdeule))
+                }
+                greatsRVAdapter.notifyDataSetChanged()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("database","database failed")
+            }
+        })
     }
 }

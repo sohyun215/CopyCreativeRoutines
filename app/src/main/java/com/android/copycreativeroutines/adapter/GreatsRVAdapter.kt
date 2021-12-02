@@ -1,5 +1,6 @@
 package com.android.copycreativeroutines.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,6 @@ class GreatsRVAdapter() : RecyclerView.Adapter<GreatsRVAdapter.GreatsViewHolder>
     private lateinit var itemClickListner: ItemClickListener
     var greatsList = mutableListOf<Great>()
 
-
     interface ItemClickListener{
         fun onClick(view: View, position: Int)
     }
@@ -24,10 +24,11 @@ class GreatsRVAdapter() : RecyclerView.Adapter<GreatsRVAdapter.GreatsViewHolder>
 
     class GreatsViewHolder (private val binding : ItemGreatsListBinding) : RecyclerView.ViewHolder(binding.root){
         fun onBind(data : Great) {
-            Glide.with(this.itemView.context)
-                .load(data.image)
-                .circleCrop()
-                .into(binding.ivGreatsImage)
+            Log.d("datatesttt",data.toString())
+//            Glide.with(this.itemView.context)
+//                .load(data.image)
+//                .circleCrop()
+//                .into(binding.ivGreatsImage)
             binding.tvGreatName.text = data.name
         }
     }
@@ -39,6 +40,7 @@ class GreatsRVAdapter() : RecyclerView.Adapter<GreatsRVAdapter.GreatsViewHolder>
 
     override fun onBindViewHolder(holder: GreatsViewHolder, position: Int) {
         holder.onBind(greatsList[position])
+
 
         holder.itemView.setOnClickListener{
             itemClickListner.onClick(it,position)
