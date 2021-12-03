@@ -66,6 +66,7 @@ class GreatsFragment : Fragment() {
                     val descript: String = ds.child("descript").value.toString()
                     val category: String = ds.child("category").value.toString()
 //                    val schdeule = listOf<Great.Schedule>() // 추가
+
                     val schedList = mutableListOf<Great.Schedule>()
                     for (sched in ds.child("schedule").children) {
                         val startTime :String = sched.child("start").value.toString()
@@ -75,8 +76,10 @@ class GreatsFragment : Fragment() {
                     }
 
                     list.add(Great(name,category,image,descript,schedList))
+
+                    list.add(Great(name, category, image, descript, schedList))
                 }
-                Log.d("database",list.toString())
+                Log.e("database",list.toString())
                 greatsRVAdapter.notifyDataSetChanged()
             }
 
