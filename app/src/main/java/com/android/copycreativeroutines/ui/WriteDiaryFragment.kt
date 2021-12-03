@@ -36,7 +36,7 @@ class WriteDiaryFragment : Fragment() {
 
         //오늘날짜 가져오기--> Firebase에서 key로 사용
         val currentTime=Calendar.getInstance().time
-        val date=SimpleDateFormat("yyyy-MM-dd EE요일", Locale.getDefault()).format(currentTime)
+        val date=SimpleDateFormat("yyyy-MM-dd EE", Locale.getDefault()).format(currentTime)
 
         binding.saveBtn.setOnClickListener {
             val DiaryContents=binding.diaryEditText.text.toString()

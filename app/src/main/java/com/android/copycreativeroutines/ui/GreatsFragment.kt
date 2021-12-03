@@ -74,9 +74,6 @@ class GreatsFragment : Fragment() {
                         val title :String = sched.child("title").value.toString()
                         schedList.add(Great.Schedule(title, startTime,endTime))
                     }
-
-                    list.add(Great(name,category,image,descript,schedList))
-
                     list.add(Great(name, category, image, descript, schedList))
                 }
                 Log.e("database",list.toString())
