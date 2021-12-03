@@ -58,6 +58,7 @@
         <entry key="app/src/main/res/layout/fragment_reward.xml" value="0.1911231884057971" />
         <entry key="app/src/main/res/layout/item_greats_list.xml" value="0.7394575710809105" />
         <entry key="app/src/main/res/layout/item_ranking_list.xml" value="0.43574741179446286" />
+        <entry key="app/src/main/res/layout/item_schedule_list.xml" value="0.9" />
         <entry key="app/src/main/res/menu/menu_bottom_nav.xml" value="0.2552083333333333" />
       </map>
     </option>
