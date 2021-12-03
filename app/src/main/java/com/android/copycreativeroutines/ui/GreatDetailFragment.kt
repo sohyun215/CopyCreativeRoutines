@@ -2,15 +2,14 @@ package com.android.copycreativeroutines.ui
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.android.copycreativeroutines.R
 import com.android.copycreativeroutines.adapter.ScheduleSelectAdapter
 import com.android.copycreativeroutines.data.Great
-import com.android.copycreativeroutines.data.User
 import com.android.copycreativeroutines.databinding.FragmentGreatDetailBinding
 import com.bumptech.glide.Glide
 import com.google.firebase.database.FirebaseDatabase
@@ -21,7 +20,6 @@ class GreatDetailFragment(private val great: Great) : Fragment() {
     private lateinit var binding: FragmentGreatDetailBinding
     private lateinit var scheduleSelectAdapter: ScheduleSelectAdapter
     private var listener: OnFragmentInteractionListener? = null
-    var checkedScheduleList = mutableListOf<Int>()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -67,17 +65,18 @@ class GreatDetailFragment(private val great: Great) : Fragment() {
         }
 
         binding.ivAddBtn.setOnClickListener {
-            addSchedule()
-            listener?.onFragmentInteraction()
+            if (scheduleSelectAdapter.checkedList.size > 0) {
+                addSchedule()
+                listener?.onFragmentInteraction()
+            } else {
+                Toast.makeText(context, "일과를 선택해주세요", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
     private fun addSchedule() {
-        checkedScheduleList = scheduleSelectAdapter.checkedList
-
-
         val user= FirebaseDatabase.getInstance().getReference("User")
-        for (index in checkedScheduleList) {
+        for (index in scheduleSelectAdapter.checkedList) {
             user.child("schedule")
                 .push()
                 .setValue(great.schedule[index])
