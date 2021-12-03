@@ -1,6 +1,5 @@
 package com.android.copycreativeroutines.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 
 
-class GreatsRVAdapter() : RecyclerView.Adapter<GreatsRVAdapter.GreatsViewHolder>() {
+class GreatsRVAdapter : RecyclerView.Adapter<GreatsRVAdapter.GreatsViewHolder>() {
     private lateinit var itemClickListner: ItemClickListener
     var greatsList = mutableListOf<Great>()
 
@@ -43,7 +42,6 @@ class GreatsRVAdapter() : RecyclerView.Adapter<GreatsRVAdapter.GreatsViewHolder>
 
     override fun onBindViewHolder(holder: GreatsViewHolder, position: Int) {
         holder.onBind(greatsList[position])
-
 
         holder.itemView.setOnClickListener{
             itemClickListner.onClick(it,position)

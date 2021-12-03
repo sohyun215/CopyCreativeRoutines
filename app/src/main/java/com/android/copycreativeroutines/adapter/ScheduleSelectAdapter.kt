@@ -8,20 +8,21 @@ import com.android.copycreativeroutines.databinding.ItemGreatScheduleListBinding
 
 class ScheduleSelectAdapter : RecyclerView.Adapter<ScheduleSelectAdapter.ScheduleViewHolder>() {
     val sheduleList = mutableListOf<Great.Schedule>()
+    var checkedList = mutableListOf<Int>()
 
     class ScheduleViewHolder (private val binding : ItemGreatScheduleListBinding) : RecyclerView.ViewHolder(binding.root){
+        val checkBox = binding.cbScheduleSelect
         fun onBind(data : Great.Schedule) {
             binding.tvScheduleName.text = data.title
 
             val scheduleTime : String
-            if(data.endTime.isEmpty()){
-                scheduleTime = data.startTime
+            if(data.end.isEmpty()){
+                scheduleTime = data.start
             }
             else {
-                scheduleTime = "${data.startTime} - ${data.endTime}"
+                scheduleTime = "${data.start} - ${data.end}"
             }
             binding.tvScheduleTime.text = scheduleTime
-
         }
     }
 
@@ -32,6 +33,15 @@ class ScheduleSelectAdapter : RecyclerView.Adapter<ScheduleSelectAdapter.Schedul
 
     override fun onBindViewHolder(holder: ScheduleViewHolder, position: Int) {
         holder.onBind(sheduleList[position])
+
+        holder.checkBox.setOnClickListener{
+            if (holder.checkBox.isChecked) {
+                checkedList.add(position)
+            }
+            else {
+                checkedList.remove(position)
+            }
+        }
     }
 
     override fun getItemCount() = sheduleList.size

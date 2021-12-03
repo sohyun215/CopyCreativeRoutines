@@ -39,13 +39,10 @@ class GreatsFragment : Fragment() {
         greatsRVAdapter = GreatsRVAdapter()
         greatsRVAdapter.setItemClickListener(object : GreatsRVAdapter.ItemClickListener {
             override fun onClick(view: View, position: Int) {
-                // great 정보 GreatDetailFragment에 넘겨주기
-//               greatsRVAdapter.greatsList[position]
-
                 requireActivity()
                     .supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.fc_home, GreatDetailFragment())
+                    .replace(R.id.fc_home, GreatDetailFragment(list[position]))
                     .addToBackStack(null)
                     .commit()
             }
@@ -53,7 +50,6 @@ class GreatsFragment : Fragment() {
         greatsRVAdapter.greatsList = list
         binding.rvGreats.adapter = greatsRVAdapter
     }
-
 
     private fun initData() {
         val myRef = Firebase.database.getReference("Greats")
@@ -65,7 +61,6 @@ class GreatsFragment : Fragment() {
                     val image: String = ds.child("image").value.toString()
                     val descript: String = ds.child("descript").value.toString()
                     val category: String = ds.child("category").value.toString()
-//                    val schdeule = listOf<Great.Schedule>() // 추가
 
                     val schedList = mutableListOf<Great.Schedule>()
                     for (sched in ds.child("schedule").children) {
@@ -74,12 +69,8 @@ class GreatsFragment : Fragment() {
                         val title :String = sched.child("title").value.toString()
                         schedList.add(Great.Schedule(title, startTime,endTime))
                     }
-
-                    list.add(Great(name,category,image,descript,schedList))
-
                     list.add(Great(name, category, image, descript, schedList))
                 }
-                Log.e("database",list.toString())
                 greatsRVAdapter.notifyDataSetChanged()
             }
 
@@ -87,5 +78,10 @@ class GreatsFragment : Fragment() {
                 Log.e("database","database failed")
             }
         })
+    }
+
+    override fun onStop() {
+        super.onStop()
+        greatsRVAdapter.greatsList.clear()
     }
 }
