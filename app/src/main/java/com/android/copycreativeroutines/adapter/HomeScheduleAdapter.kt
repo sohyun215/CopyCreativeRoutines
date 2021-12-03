@@ -6,8 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.copycreativeroutines.data.Great
 import com.android.copycreativeroutines.databinding.ItemScheduleListBinding
 
-class HomeScheduleAdapter(val schedule:List<Great.Schedule>)
-    : RecyclerView.Adapter<HomeScheduleAdapter.ViewHolder>(){
+class HomeScheduleAdapter() : RecyclerView.Adapter<HomeScheduleAdapter.ViewHolder>(){
+    var schedules = mutableListOf<Great.Schedule>()
+
     inner class ViewHolder(val binding:ItemScheduleListBinding):RecyclerView.ViewHolder(binding.root){
         val titleView=binding.scheduleTitle
         val timeView=binding.scheduleTime
@@ -25,7 +26,7 @@ class HomeScheduleAdapter(val schedule:List<Great.Schedule>)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item=schedule[position]
+        val item=schedules[position]
         val scheduleTime : String
 
         holder.titleView.text=item.title
@@ -38,7 +39,7 @@ class HomeScheduleAdapter(val schedule:List<Great.Schedule>)
         holder.timeView.text=scheduleTime
     }
 
-    override fun getItemCount(): Int =schedule.size
+    override fun getItemCount(): Int =schedules.size
 
 
 }
