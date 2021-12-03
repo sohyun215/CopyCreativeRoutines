@@ -9,7 +9,7 @@ data class Great(
 ) {
     data class Schedule(
         val title: String,
-        val startTime: String,
-        val endTime: String
+        val start: String,
+        val end: String
     )
 }

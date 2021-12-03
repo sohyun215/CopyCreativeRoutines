@@ -29,11 +29,11 @@ class HomeScheduleAdapter(val schedule:List<Great.Schedule>)
         val scheduleTime : String
 
         holder.titleView.text=item.title
-        if(item.endTime.isEmpty()){
-            scheduleTime = item.startTime
+        if(item.end.isEmpty()){
+            scheduleTime = item.start
         }
         else {
-            scheduleTime = "${item.startTime} - ${item.endTime}"
+            scheduleTime = "${item.start} - ${item.end}"
         }
         holder.timeView.text=scheduleTime
     }

@@ -2,6 +2,7 @@ package com.android.copycreativeroutines.ui
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,12 +10,18 @@ import androidx.fragment.app.Fragment
 import com.android.copycreativeroutines.R
 import com.android.copycreativeroutines.adapter.ScheduleSelectAdapter
 import com.android.copycreativeroutines.data.Great
+import com.android.copycreativeroutines.data.User
 import com.android.copycreativeroutines.databinding.FragmentGreatDetailBinding
+import com.bumptech.glide.Glide
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 
-class GreatDetailFragment : Fragment() {
-    private lateinit var binding : FragmentGreatDetailBinding
-    private lateinit var scheduleSelectAdapter : ScheduleSelectAdapter
+class GreatDetailFragment(private val great: Great) : Fragment() {
+    private lateinit var binding: FragmentGreatDetailBinding
+    private lateinit var scheduleSelectAdapter: ScheduleSelectAdapter
     private var listener: OnFragmentInteractionListener? = null
+    var checkedScheduleList = mutableListOf<Int>()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -40,17 +47,14 @@ class GreatDetailFragment : Fragment() {
     }
 
     private fun initView() {
-//        GreatsFragment에서 클릭한 인물의 정보를 받아서 띄워주기
-
-//        val image = intent.getStringExtra("image")
-//        val name = intent.getStringExtra("name")
-
-//        Glide.with(this)
-//            .load(image)
-//            .circleCrop()
-//            .into(binding.ivGreatImage)
-//        binding.tvGreatName.text = name
-//        binding.tvGreatInfo.text = "찰스 로버트 다윈은 영국의 생물학자이자 지질학자로서 진화론에 기여가 가장 크다고 알려져 있다."
+        Firebase.storage.reference.child(great.image).downloadUrl.addOnSuccessListener {
+            Glide.with(this)
+                .load(it.toString())
+                .circleCrop()
+                .into(binding.ivGreatImage)
+        }
+        binding.tvGreatName.text = great.name
+        binding.tvGreatInfo.text = great.descript
     }
 
     private fun initBtn() {
@@ -69,22 +73,21 @@ class GreatDetailFragment : Fragment() {
     }
 
     private fun addSchedule() {
-        // 일정 추가 기능 구현
+        checkedScheduleList = scheduleSelectAdapter.checkedList
 
+
+        val user= FirebaseDatabase.getInstance().getReference("User")
+        for (index in checkedScheduleList) {
+            user.child("schedule")
+                .push()
+                .setValue(great.schedule[index])
+        }
     }
 
     private fun initAdapter() {
         scheduleSelectAdapter = ScheduleSelectAdapter()
+        scheduleSelectAdapter.sheduleList.addAll(great.schedule)
         binding.rvScheduleList.adapter = scheduleSelectAdapter
-
-        scheduleSelectAdapter.sheduleList.addAll( // schedule 서버 api 구현 필요
-            listOf(
-                Great.Schedule("기상","AM 7:00", ""),
-                Great.Schedule("가벼운 산책","AM 7:00","AM 7:30"),
-                Great.Schedule("아침 식사","AM 7:30","AM 8:00"),
-                Great.Schedule("일&편지 읽기","AM 8:00","AM 12:00")
-            )
-        )
     }
 
     interface OnFragmentInteractionListener {
