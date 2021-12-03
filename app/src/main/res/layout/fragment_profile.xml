@@ -70,8 +70,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_diary"
         android:layout_width="match_parent"
-        android:layout_height="440dp"
+        android:layout_height="0dp"
         android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/writeDiaryBtn"
         app:layout_constraintTop_toBottomOf="@+id/listTitle"
         tools:layout_editor_absoluteX="1dp">
 
@@ -82,14 +83,17 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="20dp"
         android:backgroundTint="#E7E7E7"
         android:text="일기 쓰기"
         android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_diary" />
+        app:layout_constraintTop_toBottomOf="@+id/rv_diary"
+        app:layout_constraintVertical_bias="0.961" />
 </androidx.constraintlayout.widget.ConstraintLayout>
