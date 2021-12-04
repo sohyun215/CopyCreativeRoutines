@@ -22,8 +22,20 @@
     <style name="calender_todayTextStyle">
         <item name="android:textColor">@color/today_text_color</item>
     </style>
+    <style name="calender_selectedTextStyle">
+        <item name="android:textColor">@color/today_text_color</item>
+    </style>
     <style name="BottomNavigation.ItemTextAppearance" parent="TextAppearance.AppCompat">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">12sp</item>
+    </style>
+    <style name="DatePicker" parent="Theme.MaterialComponents.Dialog">
+        <item name="colorAccent">@color/black</item>
+        <item name="colorControlActivated">@color/today_text_color</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:textColorSecondary">@color/black</item>
+        <item name="android:textColorPrimaryInverse">@color/white</item>
+        <item name="android:textColorSecondaryInverse">@color/white</item>
     </style>
 </resources>

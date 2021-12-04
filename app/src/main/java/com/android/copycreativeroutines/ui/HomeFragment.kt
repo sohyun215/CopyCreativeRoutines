@@ -1,5 +1,6 @@
 package com.android.copycreativeroutines.ui
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -34,14 +35,35 @@ class HomeFragment : Fragment() {
 
     fun init() {
         val calendarView = binding.calendarView
-        val today = CalendarDay.today()
-        calendarView.setSelectedDate(today)
+        val ymText=binding.calendarYm
+        val pickerBtn=binding.pickerBtn
 
+        calendarView.topbarVisible=false
+        calendarView.isDynamicHeightEnabled=true
+        val today = CalendarDay.today() // yyyy-mm-dd
+        calendarView.selectedDate = today
+        ymText.text=today.year.toString()+"."+today.month.toString()
         if (calendarView.currentDate.equals(today))
             calendarView.setDateTextAppearance(R.style.calender_todayTextStyle)
 
+        val datePickerDialog=DatePickerDialog(requireContext(),R.style.DatePicker,DatePickerDialog.OnDateSetListener {
+                view, year, month, dayOfMonth ->
+            calendarView.selectedDate=CalendarDay.from(year,month+1,dayOfMonth)
+            calendarView.currentDate=calendarView.selectedDate
+            Log.i("selected",calendarView.selectedDate.toString())
+        },today.year,today.month-1,today.day)
+        pickerBtn.setOnClickListener {
+            datePickerDialog.show()
+        }
+
         initData()
         initAdapter()
+
+        calendarView.setOnDateChangedListener { widget, date, selected ->
+        }
+        calendarView.setOnMonthChangedListener { widget, date ->
+            ymText.text=date.year.toString()+"."+date.month.toString()
+        }
     }
 
     private fun initAdapter() {
