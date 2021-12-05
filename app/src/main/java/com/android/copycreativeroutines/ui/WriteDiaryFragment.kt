@@ -10,6 +10,7 @@ import com.android.copycreativeroutines.R
 import com.android.copycreativeroutines.adapter.MyPageRVAdapter
 import com.android.copycreativeroutines.data.User
 import com.android.copycreativeroutines.databinding.FragmentWriteDiaryBinding
+import com.android.copycreativeroutines.util.FBAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import java.text.SimpleDateFormat
@@ -31,7 +32,7 @@ class WriteDiaryFragment : Fragment() {
     }
 
     fun init(){
-        rdb= FirebaseDatabase.getInstance().getReference("User")
+        rdb= FirebaseDatabase.getInstance().getReference("User").child(FBAuth.getUid())
 
 
         //오늘날짜 가져오기--> Firebase에서 key로 사용

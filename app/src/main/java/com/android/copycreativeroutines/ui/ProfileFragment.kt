@@ -13,6 +13,7 @@ import com.android.copycreativeroutines.adapter.MyPageRVAdapter
 import com.android.copycreativeroutines.data.User
 import com.android.copycreativeroutines.databinding.FragmentGreatsBinding
 import com.android.copycreativeroutines.databinding.FragmentProfileBinding
+import com.android.copycreativeroutines.util.FBAuth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 
@@ -40,7 +41,9 @@ class ProfileFragment : Fragment() {
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         binding.rvDiary.adapter=myPageRVAdapter
 
-        rdb= FirebaseDatabase.getInstance().getReference("User/userDiary")
+        binding.userId.text = FBAuth.getUid().chunked(10)[0]
+
+        rdb= FirebaseDatabase.getInstance().getReference("User").child(FBAuth.getUid()).child("userDiary")
         rdb.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 myPageRVAdapter.diaryList.clear()
