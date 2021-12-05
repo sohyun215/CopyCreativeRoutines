@@ -1,11 +1,17 @@
 package com.android.copycreativeroutines.ui
 
 import android.app.DatePickerDialog
+import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
+import android.text.style.ForegroundColorSpan
+import android.text.style.RelativeSizeSpan
+import android.text.style.StyleSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.copycreativeroutines.R
@@ -19,6 +25,8 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.prolificinteractive.materialcalendarview.CalendarDay
+import com.prolificinteractive.materialcalendarview.DayViewDecorator
+import com.prolificinteractive.materialcalendarview.DayViewFacade
 
 class HomeFragment : Fragment() {
 
@@ -35,17 +43,43 @@ class HomeFragment : Fragment() {
     }
 
     fun init() {
+        initView()
+        initData()
+        initAdapter()
+    }
+
+    private fun initView(){
         val calendarView = binding.calendarView
         val ymText=binding.calendarYm
         val pickerBtn=binding.pickerBtn
+        val today = CalendarDay.today() // yyyy-mm-dd
 
+        calendarView.selectedDate = today
         calendarView.topbarVisible=false
         calendarView.isDynamicHeightEnabled=true
-        val today = CalendarDay.today() // yyyy-mm-dd
-        calendarView.selectedDate = today
         ymText.text=today.year.toString()+"."+today.month.toString()
-        if (calendarView.currentDate.equals(today))
-            calendarView.setDateTextAppearance(R.style.calender_todayTextStyle)
+
+        val todayDecorator=object :DayViewDecorator{
+            override fun shouldDecorate(day: CalendarDay?): Boolean {
+                return day?.equals(today)!!
+            }
+            override fun decorate(view: DayViewFacade?) {
+                view?.addSpan(StyleSpan(Typeface.BOLD))
+                view?.addSpan(RelativeSizeSpan(1.2f))
+            }
+        }
+        val otherDayDecorator=object :DayViewDecorator{
+            val drawable=ContextCompat.getDrawable(requireContext(),R.drawable.selector_other_day)
+            override fun shouldDecorate(day: CalendarDay?): Boolean {
+                return !(day?.equals(today)!!)
+            }
+            override fun decorate(view: DayViewFacade?) {
+                view?.setSelectionDrawable(drawable!!)
+                view?.addSpan(ForegroundColorSpan(Color.BLACK))
+            }
+        }
+        calendarView.addDecorator(todayDecorator)
+        calendarView.addDecorator(otherDayDecorator)
 
         val datePickerDialog=DatePickerDialog(requireContext(),R.style.DatePicker,DatePickerDialog.OnDateSetListener {
                 view, year, month, dayOfMonth ->
@@ -56,10 +90,6 @@ class HomeFragment : Fragment() {
         pickerBtn.setOnClickListener {
             datePickerDialog.show()
         }
-
-        initData()
-        initAdapter()
-
         calendarView.setOnDateChangedListener { widget, date, selected ->
         }
         calendarView.setOnMonthChangedListener { widget, date ->

@@ -3,6 +3,23 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3175925925925926" />
+        <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/drawable/ic_bottom_nav_home.xml" value="0.1" />
+        <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/drawable/ic_bottom_nav_reward.xml" value="0.1" />
+        <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/drawable/ic_checkbox_off.xml" value="0.1" />
+        <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/drawable/ic_checkbox_on.xml" value="0.3175925925925926" />
+        <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/drawable/ic_greats_image.xml" value="0.3175925925925926" />
+        <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/drawable/ic_round_expand_more.xml" value="0.3175925925925926" />
+        <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/drawable/ic_selector_other_day.xml" value="0.1" />
+        <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/drawable/list_circle.xml" value="0.3175925925925926" />
+        <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/drawable/list_line.xml" value="0.3175925925925926" />
+        <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/drawable/selector_great_schedule.xml" value="0.35185185185185186" />
+        <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/drawable/selector_other_day.xml" value="0.1" />
+        <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/drawable/selector_reward_btn.xml" value="0.35185185185185186" />
+        <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/drawable/selector_reward_text.xml" value="0.3175925925925926" />
+        <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/drawable/shape_reward_btn_selected.xml" value="0.3175925925925926" />
+        <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/drawable/shape_reward_btn_unselected.xml" value="0.3175925925925926" />
+        <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/layout/fragment_home.xml" value="0.17274569402228976" />
         <entry key="..\:/Users/kshyu/StudioProjects/CopyCreativeRoutines/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.23802083333333332" />
         <entry key="..\:/Users/kshyu/StudioProjects/CopyCreativeRoutines/app/src/main/res/drawable/circle_list.xml" value="0.1" />
         <entry key="..\:/Users/kshyu/StudioProjects/CopyCreativeRoutines/app/src/main/res/drawable/ic_bottom_nav_greats.xml" value="0.246875" />
