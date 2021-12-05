@@ -1,14 +1,17 @@
 package com.android.copycreativeroutines.data
 
-import java.io.Serializable
-
 data class User(
     val id : String,
-    val name : String,
-    val point : Int
+    val point : Int = 0
 ){
     data class Diary(
-        val date:String?=null,
-        val content:String?=null
-    ):Serializable
+        val date : String,
+        val content : String
+    )
+    data class Schedule(
+        val title : String,
+        val date : String,
+        val start : String,
+        val end : String
+    )
 }

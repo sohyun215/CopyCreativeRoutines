@@ -34,14 +34,14 @@ class RankingFragment : Fragment() {
 
         rankingRVAdapter.userList.addAll( // 유저 추가
             listOf(
-                User("","User1",101),
-                User("","User2",102),
-                User("","User3",103),
-                User("","User4",104),
-                User("","User5",105),
-                User("","User6",106),
-                User("","User7",107),
-                User("","User8",108)
+                User("User1",101),
+                User("User2",102),
+                User("User3",103),
+                User("User4",104),
+                User("User5",105),
+                User("User6",106),
+                User("User7",107),
+                User("User8",108)
             )
         )
     }

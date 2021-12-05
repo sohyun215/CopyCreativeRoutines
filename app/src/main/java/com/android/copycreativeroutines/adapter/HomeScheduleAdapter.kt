@@ -4,10 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.copycreativeroutines.data.Great
+import com.android.copycreativeroutines.data.User
 import com.android.copycreativeroutines.databinding.ItemScheduleListBinding
 
 class HomeScheduleAdapter() : RecyclerView.Adapter<HomeScheduleAdapter.ViewHolder>(){
-    var schedules = mutableListOf<Great.Schedule>()
+    var schedules = mutableListOf<User.Schedule>()
 
     inner class ViewHolder(val binding:ItemScheduleListBinding):RecyclerView.ViewHolder(binding.root){
         val titleView=binding.scheduleTitle

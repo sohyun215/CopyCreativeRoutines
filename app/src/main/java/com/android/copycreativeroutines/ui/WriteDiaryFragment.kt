@@ -37,12 +37,12 @@ class WriteDiaryFragment : Fragment() {
 
         //오늘날짜 가져오기--> Firebase에서 key로 사용
         val currentTime=Calendar.getInstance().time
-        val date=SimpleDateFormat("yyyy-MM-dd EE", Locale.getDefault()).format(currentTime)
+        val date=SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(currentTime)
 
         binding.saveBtn.setOnClickListener {
             val DiaryContents=binding.diaryEditText.text.toString()
             if(DiaryContents.isNotEmpty()){
-                rdb.child("userDiary").push().setValue(User.Diary(date,DiaryContents))
+                rdb.child("diary").push().setValue(User.Diary(date,DiaryContents))
                 //파이어베이스에 데이터 저장하고 다시 마이페이지로 돌아가기?
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.fc_home,ProfileFragment())

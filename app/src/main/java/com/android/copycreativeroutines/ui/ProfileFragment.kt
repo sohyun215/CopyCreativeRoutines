@@ -43,7 +43,7 @@ class ProfileFragment : Fragment() {
 
         binding.userId.text = FBAuth.getUid().chunked(10)[0]
 
-        rdb= FirebaseDatabase.getInstance().getReference("User").child(FBAuth.getUid()).child("userDiary")
+        rdb= FirebaseDatabase.getInstance().getReference("User").child(FBAuth.getUid()).child("diary")
         rdb.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 myPageRVAdapter.diaryList.clear()
