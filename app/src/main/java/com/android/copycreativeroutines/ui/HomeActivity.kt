@@ -9,6 +9,7 @@ import com.android.copycreativeroutines.databinding.ActivityHomeBinding
 import com.android.copycreativeroutines.util.FBAuth
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 
 class HomeActivity : AppCompatActivity(), GreatDetailFragment.OnFragmentInteractionListener {
@@ -22,20 +23,42 @@ class HomeActivity : AppCompatActivity(), GreatDetailFragment.OnFragmentInteract
         init()
     }
 
+    override fun onStart() {
+        super.onStart()
+        if (Firebase.auth.currentUser?.uid == null) {
+            initLogin()
+        } else {
+            Toast.makeText(baseContext, FBAuth.getUid(), Toast.LENGTH_SHORT).show()
+        }
+    }
+
     private fun init() {
-        initLogin()
         initBottomNavigation()
     }
+
     private fun initLogin() {
         auth = Firebase.auth
         auth.signInAnonymously().addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-
-                    Toast.makeText(baseContext, FBAuth.getUid(), Toast.LENGTH_LONG).show()
-                } else {
-                    Toast.makeText(baseContext, "로그인 실패", Toast.LENGTH_LONG).show()
-                }
+            if (task.isSuccessful) {
+                initFirebaseData()
+                Toast.makeText(baseContext, "계정 생성 성공", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(baseContext, "계정 생성 실패", Toast.LENGTH_SHORT).show()
             }
+        }
+    }
+
+    private fun initFirebaseData() {
+        val user = FirebaseDatabase.getInstance().getReference("User").child(FBAuth.getUid())
+        val category = user.child("category")
+
+        user.child("point").setValue(0)
+        category.child("composer").setValue(0)
+        category.child("writer").setValue(0)
+        category.child("philosopher").setValue(0)
+        category.child("politician").setValue(0)
+        category.child("architect").setValue(0)
+        category.child("biologist").setValue(0)
     }
 
     private fun initBottomNavigation() {

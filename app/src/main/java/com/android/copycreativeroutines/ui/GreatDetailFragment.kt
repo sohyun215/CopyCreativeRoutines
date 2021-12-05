@@ -16,6 +16,8 @@ import com.bumptech.glide.Glide
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import java.text.SimpleDateFormat
+import java.util.*
 
 class GreatDetailFragment(private val great: Great) : Fragment() {
     private lateinit var binding: FragmentGreatDetailBinding
@@ -78,9 +80,23 @@ class GreatDetailFragment(private val great: Great) : Fragment() {
     private fun addSchedule() {
         val user= FirebaseDatabase.getInstance().getReference("User").child(FBAuth.getUid())
         for (index in scheduleSelectAdapter.checkedList) {
+            val currentDate= SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Calendar.getInstance().time)
+            val title = great.schedule[index].title
+
             user.child("schedule")
-                .push()
-                .setValue(great.schedule[index])
+                .child(title)
+                .child("start")
+                .setValue(great.schedule[index].start)
+
+            user.child("schedule")
+                .child(title)
+                .child("end")
+                .setValue(great.schedule[index].end)
+
+            user.child("schedule")
+                .child(title)
+                .child("date")
+                .setValue(currentDate)
         }
     }
 

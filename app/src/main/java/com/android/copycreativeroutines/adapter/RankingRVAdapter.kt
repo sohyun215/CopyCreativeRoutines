@@ -14,13 +14,12 @@ class RankingRVAdapter  : RecyclerView.Adapter<RankingRVAdapter.RankingViewHolde
 
     class RankingViewHolder (private val binding : ItemRankingListBinding) : RecyclerView.ViewHolder(binding.root){
         fun onBind(data : User) {
-            binding.tvUserName.text = data.name
+            binding.tvUserId.text = data.id
             binding.tvUserPoint.text = data.point.toString()
 
             itemView.setOnClickListener {
                 val intent = Intent(itemView?.context, RankingDetailActivity::class.java)
                     .putExtra("id", data.id)
-                    .putExtra("name", data.name)
                 ContextCompat.startActivity(itemView.context, intent, null)
             }
         }
