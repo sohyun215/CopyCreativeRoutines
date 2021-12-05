@@ -1,13 +1,19 @@
 package com.android.copycreativeroutines.ui
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.android.copycreativeroutines.R
 import com.android.copycreativeroutines.databinding.ActivityHomeBinding
+import com.android.copycreativeroutines.util.FBAuth
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class HomeActivity : AppCompatActivity(), GreatDetailFragment.OnFragmentInteractionListener {
     private lateinit var binding: ActivityHomeBinding
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,7 +23,19 @@ class HomeActivity : AppCompatActivity(), GreatDetailFragment.OnFragmentInteract
     }
 
     private fun init() {
+        initLogin()
         initBottomNavigation()
+    }
+    private fun initLogin() {
+        auth = Firebase.auth
+        auth.signInAnonymously().addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+
+                    Toast.makeText(baseContext, FBAuth.getUid(), Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(baseContext, "로그인 실패", Toast.LENGTH_LONG).show()
+                }
+            }
     }
 
     private fun initBottomNavigation() {

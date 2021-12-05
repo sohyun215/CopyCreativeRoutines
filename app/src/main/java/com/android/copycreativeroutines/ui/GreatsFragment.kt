@@ -56,6 +56,7 @@ class GreatsFragment : Fragment() {
 
         myRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
+                greatsRVAdapter.greatsList.clear()
                 for (ds in snapshot.children) {
                     val name = ds.child("name").value.toString()
                     val image: String = ds.child("image").value.toString()
@@ -78,10 +79,5 @@ class GreatsFragment : Fragment() {
                 Log.e("database","database failed")
             }
         })
-    }
-
-    override fun onStop() {
-        super.onStop()
-        greatsRVAdapter.greatsList.clear()
     }
 }

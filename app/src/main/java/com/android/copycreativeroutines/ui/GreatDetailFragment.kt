@@ -11,6 +11,7 @@ import com.android.copycreativeroutines.R
 import com.android.copycreativeroutines.adapter.ScheduleSelectAdapter
 import com.android.copycreativeroutines.data.Great
 import com.android.copycreativeroutines.databinding.FragmentGreatDetailBinding
+import com.android.copycreativeroutines.util.FBAuth
 import com.bumptech.glide.Glide
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
@@ -75,7 +76,7 @@ class GreatDetailFragment(private val great: Great) : Fragment() {
     }
 
     private fun addSchedule() {
-        val user= FirebaseDatabase.getInstance().getReference("User")
+        val user= FirebaseDatabase.getInstance().getReference("User").child(FBAuth.getUid())
         for (index in scheduleSelectAdapter.checkedList) {
             user.child("schedule")
                 .push()
