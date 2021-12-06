@@ -97,6 +97,11 @@ class GreatDetailFragment(private val great: Great) : Fragment() {
                 .child(title)
                 .child("date")
                 .setValue(currentDate)
+
+            user.child("schedule")
+                .child(title)
+                .child("success")
+                .setValue(false)
         }
     }
 
