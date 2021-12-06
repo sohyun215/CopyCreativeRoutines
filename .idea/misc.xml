@@ -4,6 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3175925925925926" />
+        <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/drawable/border_layout.xml" value="0.1" />
+        <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/drawable/ic_add_black.xml" value="0.1" />
+        <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/drawable/ic_bottom_nav_greats.xml" value="0.1" />
         <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/drawable/ic_bottom_nav_home.xml" value="0.1" />
         <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/drawable/ic_bottom_nav_reward.xml" value="0.1" />
         <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/drawable/ic_checkbox_off.xml" value="0.1" />
@@ -19,7 +22,18 @@
         <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/drawable/selector_reward_text.xml" value="0.3175925925925926" />
         <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/drawable/shape_reward_btn_selected.xml" value="0.3175925925925926" />
         <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/drawable/shape_reward_btn_unselected.xml" value="0.3175925925925926" />
-        <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/layout/fragment_home.xml" value="0.17274569402228976" />
+        <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/layout/activity_ranking_detail.xml" value="0.33559782608695654" />
+        <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/layout/fragment_badge.xml" value="0.4466666666666667" />
+        <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/layout/fragment_greats.xml" value="0.15885416666666666" />
+        <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/layout/fragment_profile.xml" value="0.5" />
+        <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/layout/fragment_ranking.xml" value="0.33559782608695654" />
+        <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/layout/fragment_reward.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/layout/item_badge_list.xml" value="0.7333333333333334" />
+        <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/layout/item_greats_list.xml" value="0.33559782608695654" />
+        <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/layout/item_ranking_list.xml" value="0.8333333333333334" />
+        <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/layout/item_schedule_list.xml" value="0.33559782608695654" />
+        <entry key="..\:/Users/kshyu/AndroidStudioProjects/CopyCreativeRoutines/app/src/main/res/menu/menu_bottom_nav.xml" value="0.359375" />
         <entry key="..\:/Users/kshyu/StudioProjects/CopyCreativeRoutines/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.23802083333333332" />
         <entry key="..\:/Users/kshyu/StudioProjects/CopyCreativeRoutines/app/src/main/res/drawable/circle_list.xml" value="0.1" />
         <entry key="..\:/Users/kshyu/StudioProjects/CopyCreativeRoutines/app/src/main/res/drawable/ic_bottom_nav_greats.xml" value="0.246875" />
@@ -69,7 +83,7 @@
         <entry key="app/src/main/res/layout/fragment_badge.xml" value="0.3489583333333333" />
         <entry key="app/src/main/res/layout/fragment_great_detail.xml" value="1.0" />
         <entry key="app/src/main/res/layout/fragment_greats.xml" value="0.1911231884057971" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.7839506172839507" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1911231884057971" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.7179723678774391" />
         <entry key="app/src/main/res/layout/fragment_ranking.xml" value="0.1911231884057971" />
         <entry key="app/src/main/res/layout/fragment_reward.xml" value="0.1911231884057971" />
