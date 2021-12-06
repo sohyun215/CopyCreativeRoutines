@@ -2,6 +2,7 @@ package com.android.copycreativeroutines.ui
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,10 @@ import com.android.copycreativeroutines.data.Great
 import com.android.copycreativeroutines.databinding.FragmentGreatDetailBinding
 import com.android.copycreativeroutines.util.FBAuth
 import com.bumptech.glide.Glide
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import java.text.SimpleDateFormat
@@ -77,31 +81,60 @@ class GreatDetailFragment(private val great: Great) : Fragment() {
         }
     }
 
+    private fun setSchedule(title: String, index: Int) {
+        val user = FirebaseDatabase.getInstance().getReference("User").child(FBAuth.getUid())
+        val currentDate =
+            SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Calendar.getInstance().time)
+
+        user.child("schedule")
+            .child(title)
+            .child("title")
+            .setValue(title)
+
+        user.child("schedule")
+            .child(title)
+            .child("start")
+            .setValue(great.schedule[index].start)
+
+        user.child("schedule")
+            .child(title)
+            .child("end")
+            .setValue(great.schedule[index].end)
+
+        user.child("schedule")
+            .child(title)
+            .child("date")
+            .setValue(currentDate)
+
+        user.child("schedule")
+            .child(title)
+            .child("success")
+            .setValue(false)
+    }
+
     private fun addSchedule() {
-        val user= FirebaseDatabase.getInstance().getReference("User").child(FBAuth.getUid())
         for (index in scheduleSelectAdapter.checkedList) {
-            val currentDate= SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Calendar.getInstance().time)
             val title = great.schedule[index].title
+            val schedule =
+                FirebaseDatabase.getInstance()
+                    .getReference("User")
+                    .child(FBAuth.getUid())
+                    .child("schedule")
 
-            user.child("schedule")
-                .child(title)
-                .child("start")
-                .setValue(great.schedule[index].start)
+            schedule.orderByChild("title").equalTo(title)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        if (!dataSnapshot.exists()) {
+                            setSchedule(title, index)
+                        } else {
+                            // 동일한 title 이미 존재
+                        }
+                    }
 
-            user.child("schedule")
-                .child(title)
-                .child("end")
-                .setValue(great.schedule[index].end)
-
-            user.child("schedule")
-                .child(title)
-                .child("date")
-                .setValue(currentDate)
-
-            user.child("schedule")
-                .child(title)
-                .child("success")
-                .setValue(false)
+                    override fun onCancelled(databaseError: DatabaseError) {
+                        Log.e("database", "database failed")
+                    }
+                })
         }
     }
 
