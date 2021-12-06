@@ -21,7 +21,7 @@
             android:fontFamily="sans-serif"
             android:text="마이페이지"
             android:textColor="@color/black"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             tools:layout_editor_absoluteX="28dp"
             tools:layout_editor_absoluteY="16dp" />
@@ -31,69 +31,60 @@
         android:id="@+id/UIDtextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="5dp"
         android:text="UID :"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="#9B9FA3"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/user_id"
         app:layout_constraintTop_toBottomOf="@+id/tb_mypage" />
 
     <TextView
         android:id="@+id/user_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="25dp"
         android:text="user#123"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/UIDtextView"
+        android:textColor="#9B9FA3"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tb_mypage" />
 
     <TextView
         android:id="@+id/listTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
         android:text="일기 목록"
         android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/UIDtextView" />
+        app:layout_constraintTop_toBottomOf="@+id/tb_mypage" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_diary"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/writeDiaryBtn"
         app:layout_constraintTop_toBottomOf="@+id/listTitle"
-        tools:layout_editor_absoluteX="1dp">
+        tools:layout_editor_absoluteX="79dp">
 
     </androidx.recyclerview.widget.RecyclerView>
 
-    <Button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/writeDiaryBtn"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="20dp"
-        android:backgroundTint="#E7E7E7"
-        android:text="일기 쓰기"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:textStyle="bold"
+        android:backgroundTint="#BEA46A"
+        android:clickable="true"
+        android:src="@drawable/ic_add_black"
+        app:backgroundTint="#BEA46A"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_diary"
-        app:layout_constraintVertical_bias="0.961" />
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

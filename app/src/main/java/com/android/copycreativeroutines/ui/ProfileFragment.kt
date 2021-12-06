@@ -8,10 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.copycreativeroutines.R
-import com.android.copycreativeroutines.adapter.GreatsRVAdapter
 import com.android.copycreativeroutines.adapter.MyPageRVAdapter
 import com.android.copycreativeroutines.data.User
-import com.android.copycreativeroutines.databinding.FragmentGreatsBinding
 import com.android.copycreativeroutines.databinding.FragmentProfileBinding
 import com.android.copycreativeroutines.util.FBAuth
 import com.google.firebase.database.*
@@ -34,11 +32,23 @@ class ProfileFragment : Fragment() {
     }
 
     fun init(){
-        //UID 현재 사용자 아이디로 text설정
-        // binding.userId.text=
         myPageRVAdapter=MyPageRVAdapter(diaryList)
         binding.rvDiary.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+
+        myPageRVAdapter.itemClickListener=object :MyPageRVAdapter.OnItemClickListener{
+            override fun OnItemClick(holder:MyPageRVAdapter.ViewHolder,view: View, position: Int) {
+                val diary_content=holder.contentView.text.toString()
+                val diary_date=holder.dateView.text.toString()
+                requireActivity()
+                    .supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.fc_home, DiaryDetailFragment(diary_date,diary_content))
+                    .addToBackStack(null)
+                    .commit()
+            }
+
+        }
         binding.rvDiary.adapter=myPageRVAdapter
 
         binding.userId.text = FBAuth.getUid().chunked(10)[0]
@@ -60,15 +70,6 @@ class ProfileFragment : Fragment() {
             }
 
         })
-//        myPageRVAdapter.diaryList.addAll(
-//
-//                listOf(
-//                    User.Diary("2021-12-02 목요일","일기내용1"),
-//                    User.Diary("2021-12-03 금요일","일기내용2"),
-//                    User.Diary("2021-12-04 토요일","일기내용3")
-//                )
-//
-//            )
         binding.writeDiaryBtn.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.fc_home,WriteDiaryFragment())
