@@ -48,8 +48,13 @@ class WriteDiaryFragment : Fragment() {
                     .replace(R.id.fc_home,ProfileFragment())
                     .commit()
             }
-
-
+        }
+        binding.backBtn.setOnClickListener {
+            requireActivity()
+                .supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fc_home, ProfileFragment())
+                .commit()
         }
 
     }

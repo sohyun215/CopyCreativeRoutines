@@ -1,19 +1,27 @@
 package com.android.copycreativeroutines.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.android.copycreativeroutines.data.Great
 import com.android.copycreativeroutines.data.User
 import com.android.copycreativeroutines.databinding.ItemMypageDiaryListBinding
 
 class MyPageRVAdapter(val diaryList:MutableList<User.Diary>)
     : RecyclerView.Adapter<MyPageRVAdapter.ViewHolder>(){
+    var itemClickListener:OnItemClickListener?=null
 
-
+    interface OnItemClickListener{
+        fun OnItemClick(holder: ViewHolder,view:View,position: Int)
+    }
     inner class ViewHolder(val binding: ItemMypageDiaryListBinding): RecyclerView.ViewHolder(binding.root){
         val dateView=binding.diaryDate
         val contentView=binding.diaryContent
+        init {
+            itemView.setOnClickListener {
+                itemClickListener?.OnItemClick(this,it,position)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
