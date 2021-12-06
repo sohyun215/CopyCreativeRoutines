@@ -47,8 +47,9 @@ class HomeFragment : Fragment() {
 
     fun init() {
         initView()
-        initData()
+        initData(CalendarDay.today())
         initAdapter()
+
     }
 
     private fun initView() {
@@ -104,6 +105,9 @@ class HomeFragment : Fragment() {
             datePickerDialog.show()
         }
         calendarView.setOnDateChangedListener { widget, date, selected ->
+            //선택한 날짜에 해당하는 스케줄 받아오기
+            Log.i("selected day",date.toString())
+            initData(date)
         }
         calendarView.setOnMonthChangedListener { widget, date ->
             ymText.text = date.year.toString() + "." + date.month.toString()
@@ -146,7 +150,7 @@ class HomeFragment : Fragment() {
         binding.rvSchedule.adapter = homeScheduleAdapter
     }
 
-    private fun initData() {
+    private fun initData(selectedDate:CalendarDay) {
         val fbSchedule =
             Firebase.database.getReference("User").child(FBAuth.getUid()).child("schedule").orderByChild("start")
         fbSchedule.addValueEventListener(object : ValueEventListener {
@@ -158,7 +162,12 @@ class HomeFragment : Fragment() {
                     val end = ds.child("end").value.toString()
                     val date = ds.child("date").value.toString()
                     val success = ds.child("success").value.toString()
-                    homeScheduleAdapter.schedules.add(User.Schedule(title, date, start, end, success))
+                    val dateSplit=date.split("-")
+                    if(dateSplit[0].toInt()==selectedDate.year &&
+                        dateSplit[1].toInt()==selectedDate.month &&
+                        dateSplit[2].toInt()==selectedDate.day){
+                            homeScheduleAdapter.schedules.add(User.Schedule(title, date, start, end, success))
+                    }
                 }
                 homeScheduleAdapter.notifyDataSetChanged()
             }
