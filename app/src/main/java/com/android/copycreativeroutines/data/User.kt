@@ -9,9 +9,10 @@ data class User(
         val content : String
     )
     data class Schedule(
-        val title : String,
-        val date : String,
-        val start : String,
-        val end : String
+        val title: String,
+        val date: String,
+        val start: String,
+        val end: String,
+        val success: String
     )
 }

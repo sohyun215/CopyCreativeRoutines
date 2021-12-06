@@ -17,7 +17,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.copycreativeroutines.R
 import com.android.copycreativeroutines.adapter.HomeScheduleAdapter
-import com.android.copycreativeroutines.data.Great
 import com.android.copycreativeroutines.data.User
 import com.android.copycreativeroutines.databinding.FragmentHomeBinding
 import com.android.copycreativeroutines.util.FBAuth
@@ -149,7 +148,7 @@ class HomeFragment : Fragment() {
 
     private fun initData() {
         val fbSchedule =
-            Firebase.database.getReference("User").child(FBAuth.getUid()).child("schedule")
+            Firebase.database.getReference("User").child(FBAuth.getUid()).child("schedule").orderByChild("start")
         fbSchedule.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 homeScheduleAdapter.schedules.clear()
@@ -158,7 +157,8 @@ class HomeFragment : Fragment() {
                     val start = ds.child("start").value.toString()
                     val end = ds.child("end").value.toString()
                     val date = ds.child("date").value.toString()
-                    homeScheduleAdapter.schedules.add(User.Schedule(title, date, start, end))
+                    val success = ds.child("success").value.toString()
+                    homeScheduleAdapter.schedules.add(User.Schedule(title, date, start, end, success))
                 }
                 homeScheduleAdapter.notifyDataSetChanged()
             }
