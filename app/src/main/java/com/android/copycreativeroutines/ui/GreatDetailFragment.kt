@@ -88,6 +88,7 @@ class GreatDetailFragment(private val great: Great) : Fragment() {
         schedule.child("title").setValue(great.schedule[index].title)
         schedule.child("start").setValue(great.schedule[index].start)
         schedule.child("end").setValue(great.schedule[index].end)
+        schedule.child("category").setValue(great.category)
         schedule.child("success").setValue(false)
     }
 
