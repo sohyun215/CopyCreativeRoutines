@@ -19,9 +19,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.RankingDetailActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.HomeActivity"
             android:exported="false" />
     </application>
