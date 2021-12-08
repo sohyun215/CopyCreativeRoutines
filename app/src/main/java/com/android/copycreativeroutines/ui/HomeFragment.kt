@@ -30,6 +30,8 @@ import com.google.firebase.ktx.Firebase
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade
+import java.text.SimpleDateFormat
+import java.util.*
 
 class HomeFragment : Fragment() {
 
@@ -151,23 +153,20 @@ class HomeFragment : Fragment() {
     }
 
     private fun initData(selectedDate:CalendarDay) {
-        val fbSchedule =
-            Firebase.database.getReference("User").child(FBAuth.getUid()).child("schedule").orderByChild("start")
-        fbSchedule.addValueEventListener(object : ValueEventListener {
+        var date = "${selectedDate.year}-${selectedDate.month}-${selectedDate.day}"
+        if(selectedDate.day < 10){
+            date = "${selectedDate.year}-${selectedDate.month}-0${selectedDate.day}"
+        }
+        val fbSchedules = Firebase.database.getReference("User").child(FBAuth.getUid()).child("schedule").child(date)
+        fbSchedules.orderByChild("start").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 homeScheduleAdapter.schedules.clear()
                 for (ds in snapshot.children) {
-                    val title = ds.key.toString()
+                    val title = ds.child("title").value.toString()
                     val start = ds.child("start").value.toString()
                     val end = ds.child("end").value.toString()
-                    val date = ds.child("date").value.toString()
                     val success = ds.child("success").value.toString()
-                    val dateSplit=date.split("-")
-                    if(dateSplit[0].toInt()==selectedDate.year &&
-                        dateSplit[1].toInt()==selectedDate.month &&
-                        dateSplit[2].toInt()==selectedDate.day){
-                            homeScheduleAdapter.schedules.add(User.Schedule(title, date, start, end, success))
-                    }
+                    homeScheduleAdapter.schedules.add(User.Schedule(title, date, start, end, success))
                 }
                 homeScheduleAdapter.notifyDataSetChanged()
             }
