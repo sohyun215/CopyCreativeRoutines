@@ -81,51 +81,33 @@ class GreatDetailFragment(private val great: Great) : Fragment() {
         }
     }
 
-    private fun setSchedule(title: String, index: Int) {
-        val user = FirebaseDatabase.getInstance().getReference("User").child(FBAuth.getUid())
-        val currentDate =
-            SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Calendar.getInstance().time)
+    private fun setSchedule(index: Int) {
+        val currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Calendar.getInstance().time)
+        val schedule = FirebaseDatabase.getInstance().getReference("User").child(FBAuth.getUid()).child("schedule").child(currentDate).push()
 
-        user.child("schedule")
-            .child(title)
-            .child("title")
-            .setValue(title)
-
-        user.child("schedule")
-            .child(title)
-            .child("start")
-            .setValue(great.schedule[index].start)
-
-        user.child("schedule")
-            .child(title)
-            .child("end")
-            .setValue(great.schedule[index].end)
-
-        user.child("schedule")
-            .child(title)
-            .child("date")
-            .setValue(currentDate)
-
-        user.child("schedule")
-            .child(title)
-            .child("success")
-            .setValue(false)
+        schedule.child("title").setValue(great.schedule[index].title)
+        schedule.child("start").setValue(great.schedule[index].start)
+        schedule.child("end").setValue(great.schedule[index].end)
+        schedule.child("success").setValue(false)
     }
 
     private fun addSchedule() {
+        val currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Calendar.getInstance().time)
+
         for (index in scheduleSelectAdapter.checkedList) {
             val title = great.schedule[index].title
-            val schedule =
+            val schedules =
                 FirebaseDatabase.getInstance()
                     .getReference("User")
                     .child(FBAuth.getUid())
                     .child("schedule")
+                    .child(currentDate)
 
-            schedule.orderByChild("title").equalTo(title)
+            schedules.orderByChild("title").equalTo(title)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                         if (!dataSnapshot.exists()) {
-                            setSchedule(title, index)
+                            setSchedule(index)
                         } else {
                             // 동일한 title 이미 존재
                         }
