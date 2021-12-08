@@ -14,7 +14,7 @@ class RankingRVAdapter  : RecyclerView.Adapter<RankingRVAdapter.RankingViewHolde
     class RankingViewHolder (private val binding : ItemRankingListBinding) : RecyclerView.ViewHolder(binding.root){
         fun onBind(data : User, position: Int) {
             Glide.with(this.itemView.context)
-                .load(R.drawable.ic_list_as)
+                .load(R.mipmap.ic_list_as)
                 .circleCrop()
                 .into(binding.ivUserProfile)
             binding.tvRankingNumber.text = (position+1).toString()
