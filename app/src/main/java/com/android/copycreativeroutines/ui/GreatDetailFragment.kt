@@ -52,12 +52,21 @@ class GreatDetailFragment(private val great: Great) : Fragment() {
     }
 
     private fun initView() {
-        Firebase.storage.reference.child(great.image).downloadUrl.addOnSuccessListener {
-            Glide.with(this)
-                .load(it.toString())
-                .circleCrop()
-                .into(binding.ivGreatImage)
-        }
+        // Firebase Storage에서 이미지를 갑져오는 방식이 너무 오래걸려서 프로젝트 내부 사진으로부터 가져옴
+        val imageName = great.image.chunked(great.image.length-4)[0]
+        val image = this.context?.resources?.getIdentifier(imageName, "drawable", this.context?.packageName)
+        Glide.with(this)
+            .load(image)
+            .circleCrop()
+            .into(binding.ivGreatImage)
+
+        // Firbase Storage에서 이미지를 가져오는 방식
+//        Firebase.storage.reference.child(great.image).downloadUrl.addOnSuccessListener {
+//            Glide.with(this)
+//                .load(it.toString())
+//                .circleCrop()
+//                .into(binding.ivGreatImage)
+//        }
         binding.tvGreatName.text = great.name
         binding.tvGreatInfo.text = great.descript
     }
