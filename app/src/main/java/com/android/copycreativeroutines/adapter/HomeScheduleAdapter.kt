@@ -1,6 +1,8 @@
 package com.android.copycreativeroutines.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.copycreativeroutines.data.Great
@@ -13,12 +15,7 @@ class HomeScheduleAdapter() : RecyclerView.Adapter<HomeScheduleAdapter.ViewHolde
     inner class ViewHolder(val binding:ItemScheduleListBinding):RecyclerView.ViewHolder(binding.root){
         val titleView=binding.scheduleTitle
         val timeView=binding.scheduleTime
-        init{
-
-            itemView.setOnClickListener {
-
-            }
-        }
+        val line=binding.line
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -38,9 +35,13 @@ class HomeScheduleAdapter() : RecyclerView.Adapter<HomeScheduleAdapter.ViewHolde
             scheduleTime = "${item.start} - ${item.end}"
         }
         holder.timeView.text=scheduleTime
+        Log.i("dd",schedules.toString())
+        if(position==schedules.size-1){
+            holder.line.visibility= View.GONE
+        }
+        else holder.line.visibility=View.VISIBLE
     }
 
     override fun getItemCount(): Int =schedules.size
-
 
 }
