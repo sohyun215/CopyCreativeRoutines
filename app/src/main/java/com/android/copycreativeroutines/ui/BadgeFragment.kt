@@ -1,12 +1,15 @@
 package com.android.copycreativeroutines.ui
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.copycreativeroutines.R
 import com.android.copycreativeroutines.adapter.BadgeRVAdapter
 import com.android.copycreativeroutines.data.User
 import com.android.copycreativeroutines.databinding.FragmentBadgeBinding
@@ -20,7 +23,6 @@ class BadgeFragment : Fragment() {
 
     private lateinit var binding : FragmentBadgeBinding
     private lateinit var badgeRVAdapter: BadgeRVAdapter
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -37,8 +39,12 @@ class BadgeFragment : Fragment() {
 
     private fun initAdapter(){
         badgeRVAdapter= BadgeRVAdapter()
-        binding.rvBadge.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+        val imageArray=requireContext().resources.obtainTypedArray(R.array.badge_image)
+        val titleArray=requireContext().resources.getStringArray(R.array.badge_title)
+        val positionArray=requireContext().resources.getStringArray(R.array.badge)
+        for (i in 0 until imageArray.length()){
+            badgeRVAdapter.badgeImageList.add(mutableMapOf(positionArray[i] to mutableMapOf(titleArray[i] to imageArray.getResourceId(i,-1))))
+        }
         binding.rvBadge.adapter=badgeRVAdapter
 
     }
@@ -50,17 +56,17 @@ class BadgeFragment : Fragment() {
                 badgeRVAdapter.badgeList.clear()
                 for (ds in snapshot.children) {
                     val category = ds.key.toString()
-                    val achieve= ds.value as Long
+                    val achieve= ds.value as Long  // 스케줄 달성 횟수
                     val map= mutableMapOf(category to achieve)
                     badgeRVAdapter.badgeList.add(map)
+                    Log.i("b",badgeRVAdapter.badgeList.toString())
                 }
                 badgeRVAdapter.notifyDataSetChanged()
-            }
 
+            }
             override fun onCancelled(error: DatabaseError) {
                 Log.e("database", "database failed")
             }
         })
-
     }
 }
