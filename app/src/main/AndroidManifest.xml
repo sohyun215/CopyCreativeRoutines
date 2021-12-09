@@ -8,13 +8,18 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_list_as_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.CopyCreativeRoutines"
-        >
+        android:theme="@style/Theme.CopyCreativeRoutines">
+        <receiver
+            android:name=".adapter.AlarmReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
+
         <activity
             android:name=".ui.SplashActivity"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

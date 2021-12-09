@@ -1,6 +1,10 @@
 package com.android.copycreativeroutines.ui
 
+import android.app.AlarmManager
 import android.app.DatePickerDialog
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -16,6 +20,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.copycreativeroutines.R
+import com.android.copycreativeroutines.adapter.AlarmReceiver
 import com.android.copycreativeroutines.adapter.HomeScheduleAdapter
 import com.android.copycreativeroutines.data.User
 import com.android.copycreativeroutines.databinding.FragmentHomeBinding
@@ -51,8 +56,26 @@ class HomeFragment : Fragment() {
         initView()
         initData(CalendarDay.today())
         initAdapter()
-
+        setAlarm(homeScheduleAdapter.schedules)
     }
+
+    private fun setAlarm(sched: List<User.Schedule>) {
+        var alarmMangager = requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        var receiverIntent = Intent(context, AlarmReceiver::class.java)
+        var pendingIntent = PendingIntent.getBroadcast(context, 0,receiverIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+
+        for (s in sched) {
+            var cal = Calendar.getInstance().apply {
+                timeInMillis = System.currentTimeMillis()
+                set(Calendar.HOUR_OF_DAY,s.end.substring(0,2).toInt())
+                set(Calendar.MINUTE,s.end.substring(2,5).toInt())
+            }
+            receiverIntent.putExtra("title",s.title)
+            alarmMangager.setExact(AlarmManager.RTC_WAKEUP,cal.timeInMillis, pendingIntent)
+        }
+    }
+
 
     private fun initView() {
         val calendarView = binding.calendarView
