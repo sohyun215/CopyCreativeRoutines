@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import com.android.copycreativeroutines.R
 import com.android.copycreativeroutines.adapter.ScheduleSelectAdapter
 import com.android.copycreativeroutines.data.Great
+import com.android.copycreativeroutines.data.User
 import com.android.copycreativeroutines.databinding.FragmentGreatDetailBinding
 import com.android.copycreativeroutines.util.FBAuth
 import com.bumptech.glide.Glide
@@ -21,6 +22,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import java.text.SimpleDateFormat
+import java.time.LocalTime
 import java.util.*
 
 class GreatDetailFragment(private val great: Great) : Fragment() {
@@ -53,8 +55,9 @@ class GreatDetailFragment(private val great: Great) : Fragment() {
 
     private fun initView() {
         // Firebase Storage에서 이미지를 갑져오는 방식이 너무 오래걸려서 프로젝트 내부 사진으로부터 가져옴
-        val imageName = great.image.chunked(great.image.length-4)[0]
-        val image = this.context?.resources?.getIdentifier(imageName, "drawable", this.context?.packageName)
+        val imageName = great.image.chunked(great.image.length - 4)[0]
+        val image =
+            this.context?.resources?.getIdentifier(imageName, "drawable", this.context?.packageName)
         Glide.with(this)
             .load(image)
             .circleCrop()
@@ -91,8 +94,10 @@ class GreatDetailFragment(private val great: Great) : Fragment() {
     }
 
     private fun setSchedule(index: Int) {
-        val currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Calendar.getInstance().time)
-        val schedule = FirebaseDatabase.getInstance().getReference("User").child(FBAuth.getUid()).child("schedule").child(currentDate).push()
+        val currentDate =
+            SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Calendar.getInstance().time)
+        val schedule = FirebaseDatabase.getInstance().getReference("User").child(FBAuth.getUid())
+            .child("schedule").child(currentDate).push()
 
         schedule.child("title").setValue(great.schedule[index].title)
         schedule.child("start").setValue(great.schedule[index].start)
@@ -102,9 +107,11 @@ class GreatDetailFragment(private val great: Great) : Fragment() {
     }
 
     private fun addSchedule() {
-        val currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Calendar.getInstance().time)
+        val currentDate =
+            SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Calendar.getInstance().time)
 
         for (index in scheduleSelectAdapter.checkedList) {
+            var flag = false
             val title = great.schedule[index].title
             val schedules =
                 FirebaseDatabase.getInstance()
@@ -113,20 +120,39 @@ class GreatDetailFragment(private val great: Great) : Fragment() {
                     .child("schedule")
                     .child(currentDate)
 
-            schedules.orderByChild("title").equalTo(title)
-                .addListenerForSingleValueEvent(object : ValueEventListener {
-                    override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        if (!dataSnapshot.exists()) {
-                            setSchedule(index)
+            val greatStart = LocalTime.parse(great.schedule[index].start)
+            val greatEnd = LocalTime.parse(great.schedule[index].end)
+            schedules.orderByChild("start").addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    for (ds in snapshot.children) {
+                        val start = LocalTime.parse(ds.child("start").value.toString())
+                        val end = LocalTime.parse(ds.child("end").value.toString())
+                        if((start.compareTo(greatStart) <= 0 && greatStart.compareTo(end) < 0) ||
+                            (start.compareTo(greatEnd) < 0 && greatEnd.compareTo(end) <= 0)) {
+                            flag = true
                         } else {
-                            // 동일한 title 이미 존재
+                            schedules.orderByChild("title").equalTo(title)
+                                .addListenerForSingleValueEvent(object : ValueEventListener {
+                                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                        if (dataSnapshot.exists()) {
+                                            flag = true
+                                        }
+                                    }
+
+                                    override fun onCancelled(databaseError: DatabaseError) {
+                                        Log.e("database", "database failed")
+                                    }
+                                })
                         }
                     }
+                    if(!flag)
+                        setSchedule(index)
+                }
 
-                    override fun onCancelled(databaseError: DatabaseError) {
-                        Log.e("database", "database failed")
-                    }
-                })
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e("database", "database failed")
+                }
+            })
         }
     }
 
