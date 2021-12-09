@@ -5,70 +5,102 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.copycreativeroutines.R
-import com.android.copycreativeroutines.data.User
 import com.android.copycreativeroutines.databinding.ItemBadgeListBinding
 
-class BadgeRVAdapter: RecyclerView.Adapter<BadgeRVAdapter.BadgeViewHolder>(){
-    var badgeList= mutableListOf<MutableMap<String,Long>>()
+class BadgeRVAdapter : RecyclerView.Adapter<BadgeRVAdapter.BadgeViewHolder>() {
+    var badgeList = mutableListOf<MutableMap<String, Long>>()
+    var badgeImageList = mutableListOf<MutableMap<String, MutableMap<String, Int>>>()
 
-    inner class BadgeViewHolder (val binding : ItemBadgeListBinding) : RecyclerView.ViewHolder(binding.root){
-        val title=binding.titleCategory
-        val badgeImage=binding.badgeImageView
-        init {
+    inner class BadgeViewHolder(val binding: ItemBadgeListBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        val title = binding.badgeTitle
+        val badgeImage = binding.badgeImage
 
-            itemView.setOnClickListener {
+        fun onBind(m: MutableMap<String, MutableMap<String, Int>>) {
+            for (e in m.entries) { //{writer1 = {작가 1명달성 = 이미지 id}}
+                for (m in e.value) {
+                    title.text = m.key
+                    badgeImage.setImageResource(m.value)
+                }
             }
         }
     }
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BadgeRVAdapter.BadgeViewHolder {
-        val view= ItemBadgeListBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): BadgeRVAdapter.BadgeViewHolder {
+        val view = ItemBadgeListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return BadgeViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: BadgeRVAdapter.BadgeViewHolder, position: Int) {
-       for(e in badgeList[position].entries){
-           holder.title.text=e.key
-           //달성한 횟수에 따라 뱃지 아이콘 변경
-           if(e.key=="writer"){
-               when(e.value.toInt()){
-                   //in 3..4->
-                   //in 5-..6->
-                   7->holder.badgeImage.setColorFilter(R.color.today_text_color)
-               }
-           }
-           if(e.key=="composer"){
-               when(e.value.toInt()){
-                   //1->
-                   //2->
-                   //3->
-               }
-           }
-           if(e.key=="architect"){
-               if(e.value>=1) {
-
-               }
-           }
-           if(e.key=="biologist"){
-               if(e.value>=1) {
-
-               }
-           }
-           if(e.key=="philosopher"){
-               when(e.value.toInt()){
-                   //1->
-                   //2->
-               }
-           }
-           if(e.key=="politician"){
-               if(e.value>=1) {
-
-               }
-           }
-
-       }
+        holder.onBind(badgeImageList[position])
+        for (i in badgeImageList[position].entries) {
+            for (e in 0 until badgeList.size) {
+                for (title in badgeList[e]) {
+                    if (i.key == "composer_bronze") {
+                        if (title.key == "composer" && title.value.toInt()>=1) {
+                            Log.i("dd",title.value.toInt().toString())
+                            holder.badgeImage.setImageResource(R.drawable.ic_composer_bronze)
+                        }
+                    }
+                    if (i.key == "composer_silver") {
+                        if (title.key == "composer" && title.value.toInt()>=2) {
+                            holder.badgeImage.setImageResource(R.drawable.ic_composer_silver)
+                        }
+                    }
+                    if (i.key == "composer_gold") {
+                        if (title.key == "composer" && title.value.toInt()>=3) {
+                            holder.badgeImage.setImageResource(R.drawable.ic_composer_gold)
+                        }
+                    }
+                    if (i.key == "writer_bronze") {
+                        if (title.key == "writer" && title.value.toInt()>=3) {
+                            holder.badgeImage.setImageResource(R.drawable.ic_writer_bronze)
+                        }
+                    }
+                    if (i.key == "writer_silver") {
+                        if (title.key == "writer" && title.value.toInt()>=5) {
+                            holder.badgeImage.setImageResource(R.drawable.ic_writer_silver)
+                        }
+                    }
+                    if (i.key == "writer_gold") {
+                        if (title.key == "writer" && title.value.toInt()>=7) {
+                            holder.badgeImage.setImageResource(R.drawable.ic_writer_gold)
+                        }
+                    }
+                    if (i.key == "philosopher_silver") {
+                        if (title.key == "philosopher" && title.value.toInt()>=1) {
+                            holder.badgeImage.setImageResource(R.drawable.ic_philosopher_silver)
+                        }
+                    }
+                    if (i.key == "philosopher_gold") {
+                        if (title.key == "philosopher" && title.value.toInt()>=2) {
+                            holder.badgeImage.setImageResource(R.drawable.ic_philosopher_gold)
+                        }
+                    }
+                    if (i.key == "politician") {
+                        if (title.key == "politician" && title.value.toInt()>=1) {
+                            holder.badgeImage.setImageResource(R.drawable.ic_politician_gold)
+                        }
+                    }
+                    if (i.key == "architect") {
+                        if (title.key == "architect" && title.value.toInt()>=1) {
+                            holder.badgeImage.setImageResource(R.drawable.ic_architect_gold)
+                        }
+                    }
+                    if (i.key == "biologist") {
+                        if (title.key == "biologist" && title.value.toInt()>=1) {
+                            holder.badgeImage.setImageResource(R.drawable.ic_biologist_gold)
+                        }
+                    }
+                }
+            }
+        }
     }
 
     override fun getItemCount(): Int {
-        return badgeList.size
+        return badgeImageList.size
     }
 }

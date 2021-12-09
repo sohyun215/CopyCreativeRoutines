@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="badge_image">
+        <item>@drawable/ic_composer_bronze_disabled</item>
+        <item>@drawable/ic_composer_silver_disabled</item>
+        <item>@drawable/ic_composer_gold_disabled</item>
+        <item>@drawable/ic_writer_bronze_disabled</item>
+        <item>@drawable/ic_writer_silver_disabled</item>
+        <item>@drawable/ic_writer_gold_disabled</item>
+        <item>@drawable/ic_philosopher_silver_disabled</item>
+        <item>@drawable/ic_philosopher_gold_disabled</item>
+        <item>@drawable/ic_politician_gold_disabled</item>
+        <item>@drawable/ic_architect_gold_disabled</item>
+        <item>@drawable/ic_biologist_gold_disabled</item>
+    </array>
+    <string-array name="badge_title">
+        <item>"작곡가 1명 달성"</item>
+        <item>"작곡가 2명 달성"</item>
+        <item>"작곡가 3명 달성"</item>
+        <item>"작가 3명 달성"</item>
+        <item>"작가 5명 달성"</item>
+        <item>"작가 7명 달성"</item>
+        <item>"철학자 1명 달성"</item>
+        <item>"철학자 2명 달성"</item>
+        <item>"정치인 1명 달성"</item>
+        <item>"건축가 1명 달성"</item>
+        <item>"생물학자 1명 달성"</item>
+    </string-array>
+    <string-array name="badge">
+        <item>"composer_bronze"</item>
+        <item>"composer_silver"</item>
+        <item>"composer_gold"</item>
+        <item>"writer_bronze"</item>
+        <item>"writer_silver"</item>
+        <item>"writer_gold"</item>
+        <item>"philosopher_silver"</item>
+        <item>"philosopher_gold"</item>
+        <item>"politician"</item>
+        <item>"architect"</item>
+        <item>"biologist"</item>
+    </string-array>
+</resources>
