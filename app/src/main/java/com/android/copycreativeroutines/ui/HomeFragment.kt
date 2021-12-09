@@ -97,6 +97,7 @@ class HomeFragment : Fragment() {
             DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
                 calendarView.selectedDate = CalendarDay.from(year, month + 1, dayOfMonth)
                 calendarView.currentDate = calendarView.selectedDate
+                initData(calendarView.selectedDate!!)
                 Log.i("selected", calendarView.selectedDate.toString())
             },
             today.year,
@@ -112,6 +113,7 @@ class HomeFragment : Fragment() {
             initData(date)
         }
         calendarView.setOnMonthChangedListener { widget, date ->
+            Log.i("setOnMonthChanged",date.toString())
             ymText.text = date.year.toString() + "." + date.month.toString()
         }
 

@@ -41,7 +41,6 @@ class BadgeRVAdapter : RecyclerView.Adapter<BadgeRVAdapter.BadgeViewHolder>() {
                 for (title in badgeList[e]) {
                     if (i.key == "composer_bronze") {
                         if (title.key == "composer" && title.value.toInt()>=1) {
-                            Log.i("dd",title.value.toInt().toString())
                             holder.badgeImage.setImageResource(R.drawable.ic_composer_bronze)
                         }
                     }
