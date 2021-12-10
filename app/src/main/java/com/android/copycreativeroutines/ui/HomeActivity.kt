@@ -28,7 +28,7 @@ class HomeActivity : AppCompatActivity(), GreatDetailFragment.OnFragmentInteract
         if (Firebase.auth.currentUser?.uid == null) {
             initLogin()
         } else {
-            Toast.makeText(baseContext, FBAuth.getUid(), Toast.LENGTH_SHORT).show()
+//            Toast.makeText(baseContext, FBAuth.getUid(), Toast.LENGTH_SHORT).show()
         }
     }
 
