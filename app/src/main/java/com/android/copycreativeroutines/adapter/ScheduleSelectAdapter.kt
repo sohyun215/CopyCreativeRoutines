@@ -45,4 +45,6 @@ class ScheduleSelectAdapter : RecyclerView.Adapter<ScheduleSelectAdapter.Schedul
     }
 
     override fun getItemCount() = sheduleList.size
+
+    override fun getItemViewType(position: Int) = position
 }

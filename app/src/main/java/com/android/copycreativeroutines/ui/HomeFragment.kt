@@ -141,34 +141,34 @@ class HomeFragment : Fragment() {
         }
 
         // 나중에 삭제
-        binding.btnTest.setOnClickListener {
-            Firebase.database.getReference("User").child(FBAuth.getUid()).removeValue()
-            Firebase.auth.currentUser?.delete()
-            Firebase.auth.signOut()
-            Firebase.auth.signInAnonymously().addOnCompleteListener(requireActivity()) { task ->
-                if (task.isSuccessful) {
-                    initFirebaseData()
-                    Toast.makeText(context, "계정 생성 성공", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(context, "계정 생성 실패", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
+//        binding.btnTest.setOnClickListener {
+//            Firebase.database.getReference("User").child(FBAuth.getUid()).removeValue()
+//            Firebase.auth.currentUser?.delete()
+//            Firebase.auth.signOut()
+//            Firebase.auth.signInAnonymously().addOnCompleteListener(requireActivity()) { task ->
+//                if (task.isSuccessful) {
+//                    initFirebaseData()
+//                    Toast.makeText(context, "계정 생성 성공", Toast.LENGTH_SHORT).show()
+//                } else {
+//                    Toast.makeText(context, "계정 생성 실패", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//        }
     }
 
     // 나중에 삭제
-    private fun initFirebaseData() {
-        val user = FirebaseDatabase.getInstance().getReference("User").child(FBAuth.getUid())
-        val category = user.child("category")
-
-        user.child("point").setValue(0)
-        category.child("composer").setValue(0)
-        category.child("writer").setValue(0)
-        category.child("philosopher").setValue(0)
-        category.child("politician").setValue(0)
-        category.child("architect").setValue(0)
-        category.child("biologist").setValue(0)
-    }
+//    private fun initFirebaseData() {
+//        val user = FirebaseDatabase.getInstance().getReference("User").child(FBAuth.getUid())
+//        val category = user.child("category")
+//
+//        user.child("point").setValue(0)
+//        category.child("composer").setValue(0)
+//        category.child("writer").setValue(0)
+//        category.child("philosopher").setValue(0)
+//        category.child("politician").setValue(0)
+//        category.child("architect").setValue(0)
+//        category.child("biologist").setValue(0)
+//    }
 
     private fun initAdapter() {
         homeScheduleAdapter = HomeScheduleAdapter()
