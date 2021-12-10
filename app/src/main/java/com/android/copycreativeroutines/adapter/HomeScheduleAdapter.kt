@@ -1,11 +1,13 @@
 package com.android.copycreativeroutines.adapter
 
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.android.copycreativeroutines.R
 import com.android.copycreativeroutines.data.Great
 import com.android.copycreativeroutines.data.User
 import com.android.copycreativeroutines.databinding.ItemScheduleListBinding
@@ -43,6 +45,11 @@ class HomeScheduleAdapter() : RecyclerView.Adapter<HomeScheduleAdapter.ViewHolde
             scheduleTime = "${item.start} - ${item.end}"
         }
         holder.timeView.text=scheduleTime
+        if(item.success == "true") {
+            holder.complete.text = "완료"
+            holder.complete.setTextColor(Color.BLACK)
+        }
+
         Log.i("dd",schedules.toString())
         holder.complete.setOnClickListener{
             Log.d("btn",item.category)
@@ -78,4 +85,5 @@ class HomeScheduleAdapter() : RecyclerView.Adapter<HomeScheduleAdapter.ViewHolde
 
     override fun getItemCount(): Int =schedules.size
 
+    override fun getItemViewType(position: Int) = position
 }

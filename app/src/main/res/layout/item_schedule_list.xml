@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:background="#00ff0000"
-        android:text="완료"
+        android:text="진행중"
         android:textColor="#C8BBBB"
         android:textSize="12sp"
         app:layout_constraintTop_toTopOf="@id/scheduleTitle"
