@@ -74,14 +74,6 @@ class HomeFragment : Fragment() {
             receiverIntent.putExtra("title",s.title)
             alarmMangager.setExact(AlarmManager.RTC_WAKEUP,cal.timeInMillis, pendingIntent)
         }
-        var cal = Calendar.getInstance().apply {
-            timeInMillis = System.currentTimeMillis()
-            set(Calendar.HOUR_OF_DAY, 1)
-            set(Calendar.MINUTE,53)
-        }
-        receiverIntent.putExtra("test","testInput")
-
-        alarmMangager.setExact(AlarmManager.RTC_WAKEUP, cal.timeInMillis, pendingIntent)
     }
 
 
