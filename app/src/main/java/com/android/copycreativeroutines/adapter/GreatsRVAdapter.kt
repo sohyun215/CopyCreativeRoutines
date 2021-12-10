@@ -30,7 +30,7 @@ class GreatsRVAdapter : RecyclerView.Adapter<GreatsRVAdapter.GreatsViewHolder>()
             // Firebase Storage에서 이미지를 갑져오는 방식이 너무 오래걸려서 프로젝트 내부 사진으로부터 가져옴
             val imageName = data.image.chunked(data.image.length-4)[0]
             val image = this.itemView.context.resources.getIdentifier(imageName, "drawable", this.itemView.context.packageName)
-            Log.d("testtt", image.toString())
+//            Log.d("testtt", image.toString())
             Glide.with(this.itemView.context)
                     .load(image)
                     .circleCrop()
