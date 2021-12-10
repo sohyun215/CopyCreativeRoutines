@@ -96,14 +96,28 @@ class GreatDetailFragment(private val great: Great) : Fragment() {
     private fun setSchedule(index: Int) {
         val currentDate =
             SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Calendar.getInstance().time)
-        val schedule = FirebaseDatabase.getInstance().getReference("User").child(FBAuth.getUid())
-            .child("schedule").child(currentDate).push()
+        FirebaseDatabase.getInstance().getReference("User").child(FBAuth.getUid())
+            .child("schedule").child(currentDate)
+            .orderByChild("title")
+            .equalTo(great.schedule[index].title)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(!snapshot.exists()) {
+                    val schedule = FirebaseDatabase.getInstance().getReference("User").child(FBAuth.getUid())
+                        .child("schedule").child(currentDate).push()
 
-        schedule.child("title").setValue(great.schedule[index].title)
-        schedule.child("start").setValue(great.schedule[index].start)
-        schedule.child("end").setValue(great.schedule[index].end)
-        schedule.child("category").setValue(great.category)
-        schedule.child("success").setValue(false)
+                    schedule.child("title").setValue(great.schedule[index].title)
+                    schedule.child("start").setValue(great.schedule[index].start)
+                    schedule.child("end").setValue(great.schedule[index].end)
+                    schedule.child("category").setValue(great.category)
+                    schedule.child("success").setValue(false)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("database", "database failed")
+            }
+        })
     }
 
     private fun addSchedule() {
@@ -130,19 +144,6 @@ class GreatDetailFragment(private val great: Great) : Fragment() {
                         if((start.compareTo(greatStart) <= 0 && greatStart.compareTo(end) < 0) ||
                             (start.compareTo(greatEnd) < 0 && greatEnd.compareTo(end) <= 0)) {
                             flag = true
-                        } else {
-                            schedules.orderByChild("title").equalTo(title)
-                                .addListenerForSingleValueEvent(object : ValueEventListener {
-                                    override fun onDataChange(dataSnapshot: DataSnapshot) {
-                                        if (dataSnapshot.exists()) {
-                                            flag = true
-                                        }
-                                    }
-
-                                    override fun onCancelled(databaseError: DatabaseError) {
-                                        Log.e("database", "database failed")
-                                    }
-                                })
                         }
                     }
                     if(!flag)
