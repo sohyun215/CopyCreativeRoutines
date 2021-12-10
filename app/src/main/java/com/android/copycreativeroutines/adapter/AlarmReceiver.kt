@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.os.Bundle
 import androidx.core.app.NotificationCompat
 import com.android.copycreativeroutines.R
 
@@ -25,10 +26,11 @@ class AlarmReceiver : BroadcastReceiver() {
         notificationChannel.lockscreenVisibility = Notification.VISIBILITY_PUBLIC
 
         val builder = NotificationCompat.Builder(context, id)
-            .setSmallIcon(R.drawable.ic_baseline_alarm_24)//앱 대표 이미지로
+            .setSmallIcon(R.drawable.ic_splash_logo)//앱 대표 이미지로
             .setContentTitle("일정 완료 알림")
-            .setContentText(message)
+            .setContentText("일정이 완료되었습니다")
             .setAutoCancel(true)
+
 
 
         val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager

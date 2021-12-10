@@ -74,6 +74,14 @@ class HomeFragment : Fragment() {
             receiverIntent.putExtra("title",s.title)
             alarmMangager.setExact(AlarmManager.RTC_WAKEUP,cal.timeInMillis, pendingIntent)
         }
+        var cal = Calendar.getInstance().apply {
+            timeInMillis = System.currentTimeMillis()
+            set(Calendar.HOUR_OF_DAY, 1)
+            set(Calendar.MINUTE,53)
+        }
+        receiverIntent.putExtra("test","testInput")
+
+        alarmMangager.setExact(AlarmManager.RTC_WAKEUP, cal.timeInMillis, pendingIntent)
     }
 
 
@@ -191,7 +199,8 @@ class HomeFragment : Fragment() {
                     val start = ds.child("start").value.toString()
                     val end = ds.child("end").value.toString()
                     val success = ds.child("success").value.toString()
-                    homeScheduleAdapter.schedules.add(User.Schedule(title, date, start, end, success))
+                    val category = ds.child("category").value.toString()
+                    homeScheduleAdapter.schedules.add(User.Schedule(title, date, start, end, success,category))
                 }
                 homeScheduleAdapter.notifyDataSetChanged()
             }

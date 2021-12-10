@@ -13,6 +13,7 @@ data class User(
         val date: String,
         val start: String,
         val end: String,
-        val success: String
+        val success: String,
+        val category: String
     )
 }
