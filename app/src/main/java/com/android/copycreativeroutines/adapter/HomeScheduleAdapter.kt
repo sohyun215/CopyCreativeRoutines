@@ -47,7 +47,11 @@ class HomeScheduleAdapter() : RecyclerView.Adapter<HomeScheduleAdapter.ViewHolde
         holder.timeView.text=scheduleTime
         if(item.success == "true") {
             holder.complete.text = "완료"
-            holder.complete.setTextColor(Color.BLACK)
+            holder.complete.setTextColor(Color.parseColor("#6EC883"))
+        }
+        else {
+            holder.complete.text = "진행중"
+            holder.complete.setTextColor(Color.parseColor("#CA8989"))
         }
 
         Log.i("dd",schedules.toString())
