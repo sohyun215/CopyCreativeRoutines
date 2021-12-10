@@ -67,7 +67,6 @@
         <entry key="..\:/Users/kshyu/StudioProjects/CopyCreativeRoutines/app/src/main/res/layout/item_schedule_list.xml" value="0.11686991869918699" />
         <entry key="..\:/Users/kshyu/StudioProjects/CopyCreativeRoutines/app/src/main/res/menu/menu_bottom_nav.xml" value="0.23072916666666668" />
         <entry key="..\:/Users/kshyu/StudioProjects/CopyCreativeRoutines/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
-        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.221025641025641" />
         <entry key="app/src/main/res/drawable/ic_add_black.xml" value="0.30078125" />
         <entry key="app/src/main/res/drawable/ic_bottom_nav_greats.xml" value="0.2713541666666667" />
         <entry key="app/src/main/res/drawable/ic_bottom_nav_home.xml" value="0.2713541666666667" />
@@ -77,6 +76,7 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2713541666666667" />
         <entry key="app/src/main/res/drawable/ic_profile.xml" value="0.2671794871794872" />
         <entry key="app/src/main/res/drawable/list_circle.xml" value="0.30078125" />
+        <entry key="app/src/main/res/drawable/list_line.xml" value="0.26171875" />
         <entry key="app/src/main/res/drawable/selector_reward_badge.xml" value="0.2671794871794872" />
         <entry key="app/src/main/res/drawable/selector_reward_badge_text.xml" value="0.2671794871794872" />
         <entry key="app/src/main/res/drawable/selector_reward_btn.xml" value="0.2671794871794872" />
@@ -99,7 +99,7 @@
         <entry key="app/src/main/res/layout/fragment_reward.xml" value="0.1911231884057971" />
         <entry key="app/src/main/res/layout/item_greats_list.xml" value="0.7394575710809105" />
         <entry key="app/src/main/res/layout/item_ranking_list.xml" value="0.43574741179446286" />
-        <entry key="app/src/main/res/layout/item_schedule_list.xml" value="0.3328518176599706" />
+        <entry key="app/src/main/res/layout/item_schedule_list.xml" value="1.5" />
         <entry key="app/src/main/res/menu/menu_bottom_nav.xml" value="0.2552083333333333" />
       </map>
     </option>
