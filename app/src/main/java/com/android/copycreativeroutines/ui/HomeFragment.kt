@@ -15,7 +15,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,17 +24,14 @@ import com.android.copycreativeroutines.adapter.HomeScheduleAdapter
 import com.android.copycreativeroutines.data.User
 import com.android.copycreativeroutines.databinding.FragmentHomeBinding
 import com.android.copycreativeroutines.util.FBAuth
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade
-import java.text.SimpleDateFormat
 import java.util.*
 
 class HomeFragment : Fragment() {
@@ -60,19 +56,25 @@ class HomeFragment : Fragment() {
     }
 
     private fun setAlarm(sched: List<User.Schedule>) {
-        var alarmMangager = requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        var alarmMangager =
+            requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
         var receiverIntent = Intent(context, AlarmReceiver::class.java)
-        var pendingIntent = PendingIntent.getBroadcast(context, 0,receiverIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+        var pendingIntent = PendingIntent.getBroadcast(
+            context,
+            0,
+            receiverIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT
+        )
 
         for (s in sched) {
             var cal = Calendar.getInstance().apply {
                 timeInMillis = System.currentTimeMillis()
-                set(Calendar.HOUR_OF_DAY,s.end.substring(0,2).toInt())
-                set(Calendar.MINUTE,s.end.substring(2,5).toInt())
+                set(Calendar.HOUR_OF_DAY, s.end.substring(0, 2).toInt())
+                set(Calendar.MINUTE, s.end.substring(2, 5).toInt())
             }
-            receiverIntent.putExtra("title",s.title)
-            alarmMangager.setExact(AlarmManager.RTC_WAKEUP,cal.timeInMillis, pendingIntent)
+            receiverIntent.putExtra("title", s.title)
+            alarmMangager.setExact(AlarmManager.RTC_WAKEUP, cal.timeInMillis, pendingIntent)
         }
     }
 
@@ -127,16 +129,16 @@ class HomeFragment : Fragment() {
             today.month - 1,
             today.day
         )
-        pickerBtn.setOnClickListener {
+        binding.llCalendarYm.setOnClickListener {
             datePickerDialog.show()
         }
         calendarView.setOnDateChangedListener { widget, date, selected ->
             //선택한 날짜에 해당하는 스케줄 받아오기
-            Log.i("selected day",date.toString())
+            Log.i("selected day", date.toString())
             initData(date)
         }
         calendarView.setOnMonthChangedListener { widget, date ->
-            Log.i("setOnMonthChanged",date.toString())
+            Log.i("setOnMonthChanged", date.toString())
             ymText.text = date.year.toString() + "." + date.month.toString()
         }
 
@@ -177,12 +179,14 @@ class HomeFragment : Fragment() {
         binding.rvSchedule.adapter = homeScheduleAdapter
     }
 
-    private fun initData(selectedDate:CalendarDay) {
+    private fun initData(selectedDate: CalendarDay) {
         var date = "${selectedDate.year}-${selectedDate.month}-${selectedDate.day}"
-        if(selectedDate.day < 10){
+        if (selectedDate.day < 10) {
             date = "${selectedDate.year}-${selectedDate.month}-0${selectedDate.day}"
         }
-        val fbSchedules = Firebase.database.getReference("User").child(FBAuth.getUid()).child("schedule").child(date)
+        val fbSchedules =
+            Firebase.database.getReference("User").child(FBAuth.getUid()).child("schedule")
+                .child(date)
         fbSchedules.orderByChild("start").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 homeScheduleAdapter.schedules.clear()
@@ -192,7 +196,16 @@ class HomeFragment : Fragment() {
                     val end = ds.child("end").value.toString()
                     val success = ds.child("success").value.toString()
                     val category = ds.child("category").value.toString()
-                    homeScheduleAdapter.schedules.add(User.Schedule(title, date, start, end, success,category))
+                    homeScheduleAdapter.schedules.add(
+                        User.Schedule(
+                            title,
+                            date,
+                            start,
+                            end,
+                            success,
+                            category
+                        )
+                    )
                 }
                 homeScheduleAdapter.notifyDataSetChanged()
             }
