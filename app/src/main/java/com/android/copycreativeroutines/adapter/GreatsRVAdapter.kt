@@ -61,4 +61,6 @@ class GreatsRVAdapter : RecyclerView.Adapter<GreatsRVAdapter.GreatsViewHolder>()
     }
 
     override fun getItemCount() = greatsList.size
+
+    override fun getItemViewType(position: Int) = position
 }

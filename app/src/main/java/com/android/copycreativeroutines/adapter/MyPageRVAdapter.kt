@@ -37,4 +37,5 @@ class MyPageRVAdapter(val diaryList:MutableList<User.Diary>)
 
     override fun getItemCount(): Int =diaryList.size
 
+    override fun getItemViewType(position: Int) = position
 }
