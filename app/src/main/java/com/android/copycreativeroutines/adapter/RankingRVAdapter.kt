@@ -33,4 +33,6 @@ class RankingRVAdapter  : RecyclerView.Adapter<RankingRVAdapter.RankingViewHolde
     }
 
     override fun getItemCount() = userList.size
+
+    override fun getItemViewType(position: Int) = position
 }

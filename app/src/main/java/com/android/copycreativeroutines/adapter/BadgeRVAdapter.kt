@@ -102,4 +102,6 @@ class BadgeRVAdapter : RecyclerView.Adapter<BadgeRVAdapter.BadgeViewHolder>() {
     override fun getItemCount(): Int {
         return badgeImageList.size
     }
+
+    override fun getItemViewType(position: Int) = position
 }
